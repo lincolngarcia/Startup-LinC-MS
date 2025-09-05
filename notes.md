@@ -1,12 +1,16 @@
 # CS 260 Notes
 
-[My startup - Simon](https://simon.cs260.click)
+## LinC-MS (hyperlinktbd)
 
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
+
+## Git Setup
+
+I learned that github cli and git cli are different and much each be installed from different locations.
 
 ## AWS
 
