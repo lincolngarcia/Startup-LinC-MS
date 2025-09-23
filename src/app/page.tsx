@@ -15,7 +15,9 @@ const client = generateClient<Schema>();
 export default function App() {
   return (
     <main>
-      This site is now functional
+      <div>
+        This site is now functional
+      </div>
     </main>
   );
 }
