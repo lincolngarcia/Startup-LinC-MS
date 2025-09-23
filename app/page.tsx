@@ -13,113 +13,40 @@ Amplify.configure(outputs);
 const client = generateClient<Schema>();
 
 export default function App() {
+  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+
+  function listTodos() {
+    client.models.Todo.observeQuery().subscribe({
+      next: (data) => setTodos([...data.items]),
+    });
+  }
+
+  useEffect(() => {
+    listTodos();
+  }, []);
+
+  function createTodo() {
+    client.models.Todo.create({
+      content: window.prompt("Todo content"),
+    });
+  }
+
   return (
     <main>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web Programming 260</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-        margin: 0;
-      }
-      main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        font-size: 3vw;
-        animation: fly-in 1s ease-out;
-      }
-
-      .large {
-        display: block;
-      }
-
-      p {
-        font-size: 2em;
-        display: flex;
-        color: #666;
-      }
-
-      .course {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .courseName {
-        margin: 0.25em;
-        font-size: 3em;
-        font-weight: bold;
-        color: #111;
-      }
-      .courseNum {
-        margin: 0.25em;
-        font-size: 3em;
-        color: #da9512;
-      }
-
-      .small {
-        display: none;
-        font-size: 30vw;
-        color: #f3cf8c;
-      }
-
-      @keyframes fly-in {
-        0% {
-          transform: translateX(-200%);
-        }
-        80% {
-          transform: translateX(1%);
-        }
-        100% {
-          transform: translateX(0%);
-        }
-      }
-
-      @media (max-width: 500px) {
-        body {
-          background-color: rgb(23, 23, 23);
-        }
-        .large {
-          display: none;
-        }
-        .small {
-          display: block;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <main>
-      <div class="large">
-        <p>Welcome to your</p>
-        <div class="course">
-          <div class="courseName">Web<br />Programming</div>
-          <div class="courseNum">260</div>
-        </div>
-        <p id="serviceName">website</p>
+      <h1>My todos</h1>
+      <button onClick={createTodo}>+ new</button>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.content}</li>
+        ))}
+      </ul>
+      <div>
+        🥳 App successfully hosted. Try creating a new todo.
+        <br />
+        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+          Review next steps of this tutorial.
+        </a>
       </div>
-      <div class="small">260</div>
-    </main>
-
-    <script>
-      fetch('/config').then((r) => {
-        if (r.ok) {
-          r.json().then((config) => {
-            const serviceNameEl = document.querySelector('#serviceName');
-            serviceNameEl.textContent = config.name+" on port "+config.port;
-          });
-        }
-      });
-    </script>
-  </body>
     </main>
   );
 }
