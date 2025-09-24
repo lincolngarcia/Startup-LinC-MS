@@ -14,8 +14,8 @@ I learned that github cli and git cli are different and much each be installed f
 
 ## AWS
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+I decided to go with AWS Amplify for its lightweight design.
+I discovered that Amplify doesn't provide a static IP address, but handles routing from its backend.
 
 ## Caddy
 
