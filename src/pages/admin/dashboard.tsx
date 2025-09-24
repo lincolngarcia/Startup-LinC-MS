@@ -19,7 +19,9 @@ export default function Page() {
                 <h3>Editor</h3>
                 <div><input placeholder="edit"></input><button>Upload</button></div>
             </div>
-
+            <div>
+                <button>Edit Pages</button>
+            </div>
         </div>
     )
 }
