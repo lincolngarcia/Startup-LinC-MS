@@ -35,6 +35,8 @@ export default function Page() {
                 </div>
                 <span>database placeholder</span>
                 {/* PLACEHOLDER FOR DATABASE INTEGRATION */}
+                <span>websocket placeholder</span>
+                {/* PLACEHOLDER FOR WEBSOCKET INTEGRATION */}
             </main>
         </div>
     )
