@@ -7,7 +7,7 @@ export default function Page() {
             <nav >
                 <h2>Menu</h2>
                 <ul>
-                    <li>Analytics</li>
+                    <li><a href="/admin/analytics">Analytics</a></li>
                     <li>Pages</li>
                     <li>Settings</li>
                 </ul>
