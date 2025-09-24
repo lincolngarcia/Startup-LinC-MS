@@ -13,40 +13,43 @@ Amplify.configure(outputs);
 const client = generateClient<Schema>();
 
 export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  function listTodos() {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }
-
-  useEffect(() => {
-    listTodos();
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
-  }
-
   return (
     <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-    </main>
+        <header>
+          <h1>Simon<sup>&reg;</sup></h1>
+          <nav>
+            <menu>
+              <li><a href="/">Home</a></li>
+              <li><a href="/play">Play</a></li>
+              <li><a href="/scores">Scores</a></li>
+              <li><a href="/about">About</a></li>
+            </menu>
+          </nav>
+          <hr />
+        </header>
+
+        <main>
+          <h1>Welcome to Simon</h1>
+          <form method="get" action="/play">
+            <div>
+              <span>@</span>
+              <input type="text" placeholder="your@email.com" />
+            </div>
+            <div>
+              <span>🔒</span>
+              <input type="password" placeholder="password" />
+            </div>
+            <button type="submit">Login</button>
+            <button type="submit">Create</button>
+          </form>
+        </main>
+
+        <footer>
+          <hr />
+          <span className="text-reset">Author Name(s)</span>
+          <br />
+          <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+        </footer>
+    </main >
   );
 }
