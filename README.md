@@ -2,58 +2,71 @@
 
 [My Notes](notes.md)
 
-This deliverable will be a fully operational website content management system, designed for easy use for small business owners without design nor programming experience.
-
-
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-## 🚀 Specification Deliverable
-
-> [!NOTE]
->  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
+LinC-MS is a super simple **Content Management System** with the intended purpose of streamlining web development for small businesses with complete "out-of-the-box" features.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Are you a professional designer? How about a profesional software developer? The vast majority of people answer an emphatic 'no' to both, if not one of these questions. Why then, are website editors set up to give people who are not developers nor designers an interface to develop and design?
+
+LinC-MS is a project with the goal of providing a beautiful prebuilt **Content Management System** complete with all the bells and whistles that small businesses are looking for, without shoveling on them the task of designing and programming these sites.
+
+## 🚀 Specification Deliverable
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](design.jpg)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+```
+graph TD
+    users[Users]
+    authUsers[Authenticated Users]
+    database[Database]
+    analytics[Analytics]
+    googleAnalytics[Google Analytics]
+    cms[CMS]
+    cmsRoutes[Generated CMS Routes]
 
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    users -->|Login| authUsers
+    users --> cmsRoutes
+    authUsers --> cms
+    authUsers --> analytics
+    cms --> database
+    analytics --> database
+    database --> cmsRoutes
+    analytics --> googleAnalytics
+
 ```
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- A fully operational Content Management System to create, edit, and design web pages
+- Google Analytics Integration
+- An authentication feature for admin users.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - For content, navigation, and as templates for web page generation
+- **CSS** - For stylng said web pages, give a clean, smooth look
+- **React** - For dynamic content serving, code cleanliness, and templating.
+    - Content Serving: React provides a wide range of functions and utilities. 
+    - Templating: I'll be including several templates that will be used to modually build web pages
+- **Service** - I'll be using Google Analytics to display traffic, as well as NextJS and Content Layer
+- **DB/Login** - JWT Token Authenticated and Encrypted database storage is completely necessary for an application that has endpoints to edit, create, and destroy data.
+    - Next's ContentLayer's Database: This is will be used to store data associated with the routes and data for each page
+    - MongoDB: This database will be used to store authenticated information-- like passwords, etc
+- **WebSocket** - WebSocket will be  used to provide client-to-client and client-to-server communication in the following ways:
+    - Live Changes: WebSocket will take the edits made to the website and autosave them to the server.
+    - Live updates: WebSocket will be used to show live updates given by co-editors on the site
 
 ## 🚀 AWS deliverable
 
