@@ -1,25 +1,150 @@
-## AWS Amplify Next.js (App Router) Starter Template
+# LinC-MS (Lincoln's Content Management System)
 
-This repository provides a starter template for creating applications using Next.js (App Router) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+[My Notes](notes.md)
 
-## Overview
+LinC-MS is a super simple **Content Management System** with the intended purpose of streamlining web development for small businesses with complete "out-of-the-box" features.
 
-This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-## Features
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+### Elevator pitch
 
-## Deploying to AWS
+Are you a professional designer? How about a profesional software developer? The vast majority of people answer an emphatic 'no' to both, if not one of these questions. Why then, are website editors set up to give people who are not developers nor designers an interface to develop and design?
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/#deploy-a-fullstack-app-to-aws) of our documentation.
+LinC-MS is a project with the goal of providing a beautiful prebuilt **Content Management System** complete with all the bells and whistles that small businesses are looking for, without shoveling on them the task of designing and programming these sites.
 
-## Security
+## 🚀 Specification Deliverable
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+### Design
 
-## License
+![Design image](design.jpg)
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+```
+graph TD
+    users[Users]
+    authUsers[Authenticated Users]
+    database[Database]
+    analytics[Analytics]
+    googleAnalytics[Google Analytics]
+    cms[CMS]
+    cmsRoutes[Generated CMS Routes]
+
+    users -->|Login| authUsers
+    users --> cmsRoutes
+    authUsers --> cms
+    authUsers --> analytics
+    cms --> database
+    analytics --> database
+    database --> cmsRoutes
+    analytics --> googleAnalytics
+
+```
+
+### Key features
+
+- A fully operational Content Management System to create, edit, and design web pages
+- Google Analytics Integration
+- An authentication feature for admin users.
+
+### Technologies
+
+I am going to use the required technologies in the following ways.
+
+- **HTML** - For content, navigation, and as templates for web page generation
+- **CSS** - For stylng said web pages, give a clean, smooth look
+- **React** - For dynamic content serving, code cleanliness, and templating.
+    - Content Serving: React provides a wide range of functions and utilities. 
+    - Templating: I'll be including several templates that will be used to modually build web pages
+- **Service** - I'll be using Google Analytics to display traffic, as well as NextJS and Content Layer
+- **DB/Login** - JWT Token Authenticated and Encrypted database storage is completely necessary for an application that has endpoints to edit, create, and destroy data.
+    - Next's ContentLayer's Database: This is will be used to store data associated with the routes and data for each page
+    - MongoDB: This database will be used to store authenticated information-- like passwords, etc
+- **WebSocket** - WebSocket will be  used to provide client-to-client and client-to-server communication in the following ways:
+    - Live Changes: WebSocket will take the edits made to the website and autosave them to the server.
+    - Live updates: WebSocket will be used to show live updates given by co-editors on the site
+
+## 🚀 AWS deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://lincolngarcia.click).
+
+## 🚀 HTML deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [x] **HTML pages** - I included roughly 3 admin pages, followed by 2 basic content pages.
+- [x] **Proper HTML element usage** - I used <header>, <nav>, <footer>, <main>, <a>, and 
+    - For <header>, <footer>, <main> tags: see ~/src/app/posts/page.tsx
+    - For <html>, <body> tags: see ~/src/app/layout.tsx
+- [x] **Links** - I used several links to navigate between pages.
+    - See ~/src/app/page.tsx
+    - See ~/src/pages/admin/analytics.tsx
+    - See ~/src/pages/admin/dashboard.tsx
+    - See ~/src/pages/login.tsx
+- [x] **Text** - I included text for various application, such as the CMS, analytics, including some filler text
+- [x] **3rd party API placeholder** - See the ~/src/pages/admin/analytics.tsx for the placeholders for Google Analytics integration
+- [x] **Images** - I included some default images to be used within the CMS. See [Here](https://lincolngarcia.click) for examples.
+- [x] **Login placeholder** - See [Here](https://lincolngarcia.click) for an example. Code is found on the /login page mentioned above
+- [x] **DB data placeholder** - See [Here](https://lincolngarcia.click/admin/dashboard) for an example. Code is found on the /admin/dashboard page mentioned above
+- [x] **WebSocket placeholder** - See [Here](https://lincolngarcia.click/admin/dashboard) for an example. Code is found on the /admin/dashboard page mentioned above
+
+## 🚀 CSS deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
+- [ ] **Navigation elements** - I did not complete this part of the deliverable.
+- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
+- [ ] **Application elements** - I did not complete this part of the deliverable.
+- [ ] **Application text content** - I did not complete this part of the deliverable.
+- [ ] **Application images** - I did not complete this part of the deliverable.
+
+## 🚀 React part 1: Routing deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
+- [ ] **Components** - I did not complete this part of the deliverable.
+- [ ] **Router** - I did not complete this part of the deliverable.
+
+## 🚀 React part 2: Reactivity deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [ ] **Hooks** - I did not complete this part of the deliverable.
+
+## 🚀 Service deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
+- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
+- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+
+
+## 🚀 DB deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
+- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+
+## 🚀 WebSocket deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
+- [ ] **Application is fully functional** - I did not complete this part of the deliverable.

@@ -1,52 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
-import "./app.css";
-import { Amplify } from "aws-amplify";
-import outputs from "@/amplify_outputs.json";
-import "@aws-amplify/ui-react/styles.css";
+import Link from 'next/link'
+import { compareDesc, format, parseISO } from 'date-fns'
+import { allPosts, Post } from 'contentlayer/generated'
+import { useRouter } from 'next/navigation'
 
-Amplify.configure(outputs);
-
-const client = generateClient<Schema>();
-
-export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  function listTodos() {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }
-
-  useEffect(() => {
-    listTodos();
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
-  }
-
+function PostCard(post: Post) {
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-    </main>
-  );
+    <div className="mb-8">
+      <h2 className="mb-1 text-xl">
+        <Link href={post.url} className="text-blue-700 hover:text-blue-900 dark:text-blue-400">
+          {post.title}
+        </Link>
+      </h2>
+      <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
+        {format(parseISO(post.date), 'LLLL d, yyyy')}
+      </time>
+      <div className="text-sm [&>*]:mb-3 [&>*:last-child]:mb-0" dangerouslySetInnerHTML={{ __html: post.body.html }} />
+    </div>
+  )
+}
+
+export default function Home() {
+  const router = useRouter();
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+  function toLogin() {
+    router.push("/login");
+  }
+  return (
+    <div className="mx-auto max-w-xl py-8">
+      <div><button onClick={toLogin}>Login-admin</button></div>
+      <h1 className="mb-8 text-center text-2xl font-black">Next.js + Contentlayer Example</h1>
+      {posts.map((post, idx) => (
+        <PostCard key={idx} {...post} />
+      ))}
+      <h3>GITHUB LINK</h3>
+      <a href="https://github.com/lincolngarcia/Startup-LinC-MS">Lincoln Garcia</a>
+    </div>
+  )
 }
