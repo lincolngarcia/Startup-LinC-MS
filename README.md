@@ -72,21 +72,27 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://lincolngarcia.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I included roughly 3 admin pages, followed by 2 basic content pages.
+- [x] **Proper HTML element usage** - I used <header>, <nav>, <footer>, <main>, <a>, and 
+    - For <header>, <footer>, <main> tags: see ~/src/app/posts/page.tsx
+    - For <html>, <body> tags: see ~/src/app/layout.tsx
+- [x] **Links** - I used several links to navigate between pages.
+    - See ~/src/app/page.tsx
+    - See ~/src/pages/admin/analytics.tsx
+    - See ~/src/pages/admin/dashboard.tsx
+    - See ~/src/pages/login.tsx
+- [x] **Text** - I included text for various application, such as the CMS, analytics, including some filler text
+- [x] **3rd party API placeholder** - See the ~/src/pages/admin/analytics.tsx for the placeholders for Google Analytics integration
+- [x] **Images** - I included some default images to be used within the CMS. See [Here](https://lincolngarcia.click) for examples.
+- [x] **Login placeholder** - See [Here](https://lincolngarcia.click) for an example. Code is found on the /login page mentioned above
+- [x] **DB data placeholder** - See [Here](https://lincolngarcia.click/admin/dashboard) for an example. Code is found on the /admin/dashboard page mentioned above
+- [x] **WebSocket placeholder** - See [Here](https://lincolngarcia.click/admin/dashboard) for an example. Code is found on the /admin/dashboard page mentioned above
 
 ## 🚀 CSS deliverable
 
