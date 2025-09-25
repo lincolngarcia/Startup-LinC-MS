@@ -35,7 +35,7 @@ export default function Home() {
         <PostCard key={idx} {...post} />
       ))}
       <h3>GITHUB LINK</h3>
-      <a href="https://www.github.com/lincolngarcia">Lincoln Garcia</a>
+      <a href="https://github.com/lincolngarcia/Startup-LinC-MS">Lincoln Garcia</a>
     </div>
   )
 }
