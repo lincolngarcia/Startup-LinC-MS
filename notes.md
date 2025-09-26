@@ -23,7 +23,7 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 ## HTML
 
-I didn't know how to do HTML comments in the Amplify with React context, but I figured it out. It was pretty easy to do, but I feel like its hard to develop HTML for features that aren't built yet.
+I didn't know how to do HTML comments in the Amplify with React context, but I figured it out. It was pretty easy to do, but I feel like its hard to develop HTML for features that aren't built yet. I also learned that you need to double check that your site deployed...
 
 ## CSS
 
