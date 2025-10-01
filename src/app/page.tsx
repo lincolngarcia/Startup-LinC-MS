@@ -23,8 +23,8 @@ export default function App() {
         </div>
         <p id="serviceName">
           <a href="https://learn.cs260.click">Learn</a>
-          <a href="https://simon.cs260.click">Simon</a>
-          <a href="https://startup.cs260.click">Startup</a>
+          <a href="https://simon.lincolngarcia.click">Simon</a>
+          <a href="https://startup.lincolngarcia.click">Startup</a>
         </p>
       </div>
       <div className="small">
