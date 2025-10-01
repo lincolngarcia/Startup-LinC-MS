@@ -1,10 +1,12 @@
 'use client'
 
-export default function elevatedFlat({ children }) {
+import { ReactNode } from 'react';
+
+export default function elevatedFlat({ children }: { children: ReactNode }) {
 
     return (
         <div className="">
-
+            { children }
         </div>
 
     )
