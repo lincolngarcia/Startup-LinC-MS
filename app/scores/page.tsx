@@ -1,6 +1,13 @@
+import "./scores.css"
+import Head from "next/head"
+
 export default function Page() {
     return (
         <main>
+            <Head>
+                <title>Scores</title>
+            </Head>
+
             <header>
                 <h1>Simon<sup>&reg;</sup></h1>
 
