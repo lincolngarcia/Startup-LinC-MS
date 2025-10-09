@@ -4,17 +4,14 @@ import RootLayout from "@/app/layout"
 export default function Page() {
     return (
         <RootLayout>
-
             <main>
-                <head>
-                    <title>About</title>
-                </head>
+                <title>About</title>
                 <header className="container-fluid">
                     <nav className="navbar fixed-top navbar-dark">
                         <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>
                         <menu className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link" href="index">Home</a>
+                                <a className="nav-link" href="">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="play">Play</a>

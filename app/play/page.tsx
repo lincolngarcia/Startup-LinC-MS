@@ -4,22 +4,14 @@ import Head from "next/head";
 export default function Page() {
     return (
         <main>
-            <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Simon</title>
-                <link rel="icon" href="favicon.ico" />
-
-                <link rel="stylesheet" href="main.css" />
-                <link rel="stylesheet" href="play.css" />
-
-            </Head>
+            <title>Simon</title>
             <div className="bg-dark text-light">
                 <header className="container-fluid">
                     <nav className="navbar fixed-top navbar-dark">
                         <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>
                         <menu className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link" href="index.html">Home</a>
+                                <a className="nav-link" href="">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link active" href="play">Play</a>
