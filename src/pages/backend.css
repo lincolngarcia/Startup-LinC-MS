@@ -2,35 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-.neumorphic-box {
-  border-radius: 30px;
-  background: #e0e0e0;
-  box-shadow:  17px 17px 38px #bebebe,
-  -17px -17px 38px #ffffff;
-  padding: 20px;
+input {
+  outline: none;
+  padding: 0.2rem;
+  background: none;
 }
 
-/*
-border-radius: 30px;
-background: #dbe0e1;
-box-shadow:  17px 17px 38px #babebf,
-             -17px -17px 38px #fcffff;
-*/
-
-.flex-centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full viewport height */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  transition: background-color 500s ease-in-out 0s;
 }
 
-#login-page {
-  background: #e0e0e0;
-}
-
-#login-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; 
-    padding: 20px;
+@layer components {
+  .softShadow {
+    @apply _rounded-lg _py-1 _px-4 _transition-shadow _duration-[1s]; 
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    transition: 0.04s box-shadow ease-in-out;
+    background: #e0e0e0
+  }
+  input.softShadow:focus,
+  input.softShadow:not(:placeholder-shown),
+  .softShadow.active {
+    @apply _shadow-[inset_5px_5px_10px_#bebebe,_inset_-5px_-5px_10px_#ffffff];
+  }
 }
