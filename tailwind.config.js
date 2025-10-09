@@ -3,7 +3,6 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   prefix: "_",
   theme: {
-    extend: {},
     colors: {
       adminSuperGray: "#777777",
       adminDarkGray: "#ACACAC",
@@ -11,6 +10,14 @@ module.exports = {
       adminBlue: "#1432FF",
       adminRed: "#E84B57",
     },
+    extend: {},
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    }
   },
   plugins: [],
 }
