@@ -1,5 +1,5 @@
+import RootLayout from "./layout"
 import { Router, useRouter } from "next/router"
-import "./backend.css"
 import NeumorphicFlat from "../app/components/Backend/Neumorphic/flat";
 
 export default function Page() {
@@ -18,5 +18,13 @@ export default function Page() {
                 </NeumorphicFlat>
             </div>
         </div>
+    )
+}
+
+Page.getLayout = function getLayout(page: React.ReactNode) {
+    return (
+        <RootLayout>
+            {page}
+        </RootLayout>
     )
 }

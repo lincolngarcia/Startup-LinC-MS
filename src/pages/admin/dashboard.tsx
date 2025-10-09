@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import RootLayout from '../layout';
 export default function Page() {
     const router = useRouter();
     
@@ -39,5 +40,13 @@ export default function Page() {
                 {/* PLACEHOLDER FOR WEBSOCKET INTEGRATION */}
             </main>
         </div>
+    )
+}
+
+Page.getLayout = function getLayout(page: React.ReactNode) {
+    return (
+        <RootLayout>
+            {page}
+        </RootLayout>
     )
 }
