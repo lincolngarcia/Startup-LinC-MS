@@ -22,7 +22,7 @@ export default function App() {
           <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>
           <menu className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" href="">Home</a>
+              <a className="nav-link active" href="/">Home</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="play">Play</a>
