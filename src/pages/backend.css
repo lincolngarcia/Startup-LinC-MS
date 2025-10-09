@@ -40,4 +40,10 @@ select:-webkit-autofill:focus {
   .softShadow.active {
     @apply _shadow-[inset_5px_5px_10px_#bebebe,_inset_-5px_-5px_10px_#ffffff];
   }
+
+  .neumorphicShadow {
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    transition: 0.04s box-shadow ease-in-out;
+    background: #e0e0e0
+  }
 }
