@@ -4,6 +4,7 @@ module.exports = {
   prefix: "_",
   theme: {
     colors: {
+      adminBlack: "#333333",
       adminSuperGray: "#777777",
       adminDarkGray: "#ACACAC",
       adminGray: "#e0e0e0",
