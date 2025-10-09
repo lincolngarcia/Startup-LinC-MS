@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 
-export default function NeumorphicFlat({ children }: { children: ReactNode }) {
+export default function NeumorphicFlat({ children, className }: { children: ReactNode, className?: string }) {
 
     const _neumorphicShadow = {
         "boxShadow": "5px 5px 10px #bebebe, -5px -5px 10px#ffffff;"
@@ -12,7 +12,7 @@ export default function NeumorphicFlat({ children }: { children: ReactNode }) {
     // }
 
 return (
-    <div className="_p-4 _rounded-lg _transition-shadow _duration-[0.5s] _text-black _bg-adminGray _neumorphicShadow" style={_neumorphicShadow}>
+    <div className={className + " _p-4 _rounded-lg _transition-shadow _duration-[0.5s] _text-black _bg-adminGray _neumorphicShadow"} style={_neumorphicShadow}>
         {children}
     </div>
 )
