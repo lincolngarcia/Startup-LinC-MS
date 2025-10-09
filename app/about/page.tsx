@@ -1,9 +1,10 @@
 import "./about.css"
+import placeholder from "../../public/placeholder.jpg"
+import Image from "next/image"
 
 export default function Page() {
     return (
-        <main>
-            {/*<title>About</title>*/}
+        <main className="bg-dark text-light">
             <header className="container-fluid">
                 <nav className="navbar fixed-top navbar-dark">
                     <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>
@@ -26,7 +27,7 @@ export default function Page() {
 
             <main className="container-fluid bg-secondary text-center">
                 <div>
-                    <div id="picture" className="picture-box"><img src="placeholder.jpg" alt="random" /></div>
+                    <div id="picture" className="picture-box"><Image src={placeholder} alt="random" /></div>
 
                     <p>
                         Simon is a repetitive memory game where you follow the demonstrated color sequence until you make a mistake.

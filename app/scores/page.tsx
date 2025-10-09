@@ -2,27 +2,30 @@ import "./scores.css"
 
 export default function Page() {
     return (
-        <main>
-            {/*<title>Scores</title>*/}
-
-            <header>
-                <h1>Simon<sup>&reg;</sup></h1>
-
-                <nav>
-                    <menu>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/play">Play</a></li>
-                        <li><a href="/scores">Scores</a></li>
-                        <li><a href="/about">About</a></li>
+        <main className="bg-dark text-light">
+            <header className="container-fluid">
+                <nav className="navbar fixed-top navbar-dark">
+                    <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>
+                    <menu className="navbar-nav">
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Home</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/play">Play</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" href="/scores">Scores</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/about">About</a>
+                        </li>
                     </menu>
                 </nav>
-
-                <hr />
             </header>
 
-            <main>
-                <table>
-                    <thead>
+            <main className="container-fluid bg-secondary text-center">
+                <table className="table table-warning table-striped-columns">
+                    <thead className="table-dark">
                         <tr>
                             <th>#</th>
                             <th>Name</th>
@@ -53,11 +56,11 @@ export default function Page() {
                 </table>
             </main>
 
-            <footer>
-                <hr />
-                <span className="text-reset">Author Name(s)</span>
-                <br />
-                <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+            <footer className="bg-dark text-white-50">
+                <div className="container-fluid">
+                    <span className="text-reset">Author Name(s)</span>
+                    <a className="text-reset" href="https://github.com/webprogramming260/simon-css">Source</a>
+                </div>
             </footer>
         </main>
     )
