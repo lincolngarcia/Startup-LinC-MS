@@ -3,7 +3,7 @@ import "./scores.css"
 export default function Page() {
     return (
         <main>
-            <title>Scores</title>
+            {/*<title>Scores</title>*/}
 
             <header>
                 <h1>Simon<sup>&reg;</sup></h1>

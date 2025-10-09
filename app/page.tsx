@@ -16,7 +16,7 @@ export default function App() {
   return (
 
     <main className="bg-dark text-light">
-      <title>Welcome to Simon</title>
+      {/*<title>Welcome to Simon</title>*/}
       <header className="container-fluid">
         <nav className="navbar fixed-top navbar-dark">
           <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>

@@ -4,7 +4,7 @@ import Head from "next/head";
 export default function Page() {
     return (
         <main>
-            <title>Simon</title>
+            {/*<title>Simon</title>*/}
             <div className="bg-dark text-light">
                 <header className="container-fluid">
                     <nav className="navbar fixed-top navbar-dark">
