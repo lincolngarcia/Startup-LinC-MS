@@ -14,7 +14,7 @@ export default function Page() {
     const router = useRouter();
 
     return (
-        <div className="_min-h-screen _flex _flex-col md:_color-adminRed">
+        <div className="_min-h-screen _flex _flex-col">
             <BackendHeader title="Dashboard" />
             <main className="_h-full _bg-adminGray _grow">
                 <Grid>
