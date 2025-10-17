@@ -20,6 +20,8 @@ export default function Page() {
                         description={<p>This is a description. It descripts. Que mas quiere que te diga?</p>}
                     />
                 </Standard_FeatureStacked>
+
+                <div className="_h1"><a className="_text-adminBlue" href="https://github.com/lincolngarcia/Startup-LinC-MS">Github Repository</a></div>
             </div>
         </div>
     )
