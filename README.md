@@ -98,12 +98,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Used as appropriate. Please see admin/analytics and admin/dashboard for examples
+- [x] **Navigation elements** - Used as appropriate Please see admin/analytics and admin/dashboard for examples.
+- [x] **Responsive to window resizing** - Media queries in backend.css. Used to change grid to flex on smaller screens
+- [x] **Application elements** - Used as appropriate. Please see all components, everything in the pages directory
+- [x] **Application text content** - Text is styled throughout the application, especially on the homepage and admin/dashboard
+- [x] **Application images** - The homepage has examples of images styled. Used as appropriate
 
 ## 🚀 React part 1: Routing deliverable
 

@@ -1,11 +1,12 @@
 import {Router, useRouter} from 'next/router';
 
-export default function BackendHeader() {
+export default function BackendHeader({title}: {title?: string}) {
     const router = useRouter();
 
     return (
         <header className="_col-start-1 _col-end-4 _p-4 _bg-adminGray _flex _justify-between _items-center">
             <h1 className="_text-2xl _font-bold">LinC-MS</h1>
+            <h1 className="_text-2xl _font-bold">{title}</h1> 
             <nav>
                 <ul className="_flex _gap-4">
                     <li><a href="/admin/dashboard" className="_text-adminBlue">Dashboard</a></li>
