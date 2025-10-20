@@ -109,9 +109,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I used the nextJS in house build step. I cleared it with the professor.
+- [x] **Components** - Check out the /src/app/components directory. Used liberally
+- [x] **Router** - I used the router on the login page, however the NextJS docs prefer the <Link> component. It is used on the header component and where applicable.
 
 ## 🚀 React part 2: Reactivity deliverable
 
