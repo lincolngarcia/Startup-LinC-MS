@@ -14,25 +14,25 @@ export default function Page() {
     const router = useRouter();
 
     return (
-        <div className="_min-h-screen _flex _flex-col">
+        <div className="min-h-screen flex flex-col">
             <BackendHeader title="Dashboard" />
-            <main className="_h-full _bg-adminGray _grow">
+            <main className="h-full bg-adminGray grow">
                 <Grid>
-                    <BackendMenu className="_col-start-1 _col-end-2" active="Home" />
-                    <NeumorphicFlat className="_col-start-8 _col-end-13 _h-full">
+                    <BackendMenu className="col-start-1 col-end-2" active="Home" />
+                    <NeumorphicFlat className="col-start-8 col-end-13 h-full">
                         <h3>Editor</h3>
-                        <div className="_h-4/5">
-                            <textarea className="_h-4/5 _w-full" placeholder="write content here"></textarea>
-                            <input placeholder="edit"></input><NeumorphicFlat><button className="_w-full">upload</button></NeumorphicFlat>
+                        <div className="h-4/5">
+                            <textarea className="h-4/5 w-full" placeholder="write content here"></textarea>
+                            <input placeholder="edit"></input><NeumorphicFlat><button className="w-full">upload</button></NeumorphicFlat>
                         </div>
-                        <div className="_flex _justify-between _mt-2">
+                        <div className="flex justify-between mt-2">
                             <NeumorphicFlat><button>Edit Pages</button></NeumorphicFlat>
                             <NeumorphicFlat><button>Delete Pages</button></NeumorphicFlat>
                             <NeumorphicFlat><button>New Page</button></NeumorphicFlat>
                         </div>
                         <div>
                             <br />
-                            <NeumorphicFlat><button className="_w-full" onClick={() => router.push("/")}>View Live Site</button></NeumorphicFlat>
+                            <NeumorphicFlat><button className="w-full" onClick={() => router.push("/")}>View Live Site</button></NeumorphicFlat>
                         </div>
                     </NeumorphicFlat>
                 </Grid >

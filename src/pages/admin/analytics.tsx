@@ -9,11 +9,11 @@ import BackendFooter from "@/src/app/components/Backend/footer";
 
 export default function Page() {
     return (
-        <div className="_bg-adminGray _min-h-screen _flex _flex-col">
+        <div className="bg-adminGray min-h-screen flex flex-col">
             <BackendHeader title="Analytics Dashboard" />
-            <main className="_grow">
+            <main className="grow">
                 <Grid>
-                    <BackendMenu className="_col-start-1 _col-end-2" active="Analytics" />
+                    <BackendMenu className="col-start-1 col-end-2" active="Analytics" />
                     <NeumorphicFlat className="p-4 m-4">
                         <section>
                             <h2>Overview</h2>

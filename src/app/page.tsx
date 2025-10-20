@@ -4,8 +4,8 @@ import Standard_FeatureStackedCard from "./components/Standard/Feature/StackedCa
 
 export default function Page() {
     return (
-        <div className="_min-w-screen">
-            <div className="_max-w-[1200px] _m-auto _p-4">
+        <div className="min-w-screen">
+            <div className="max-w-[1200px] m-auto p-4">
                 <Standard_FeatureStacked>
                     <Standard_FeatureStackedCard
                         image="/content-image.jpeg"
@@ -21,7 +21,7 @@ export default function Page() {
                     />
                 </Standard_FeatureStacked>
 
-                <div className="_h1"><a className="_text-adminBlue" href="https://github.com/lincolngarcia/Startup-LinC-MS">Github Repository</a></div>
+                <div className="h1"><a className="text-adminBlue" href="https://github.com/lincolngarcia/Startup-LinC-MS">Github Repository</a></div>
             </div>
         </div>
     )
