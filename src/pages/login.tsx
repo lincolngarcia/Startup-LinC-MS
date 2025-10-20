@@ -4,7 +4,6 @@ import NeumorphicFlat from "../app/components/Backend/Neumorphic/flat";
 
 export default function Page() {
     const router = useRouter();
-
     console.log(router)
 
     return (
