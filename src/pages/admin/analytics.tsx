@@ -1,7 +1,7 @@
 import RootLayout from "../layout"
 import NeumorphicFlat from "@/src/app/components/Backend/Neumorphic/flat"
 import NeumorphicPressed from "@/src/app/components/Backend/Neumorphic/pressed"
-import BackendMenu from "@/src/app/components/Backend/Menu";
+import BackendMenu from "@/src/app/components/Backend/menu";
 import Grid from "@/src/app/components/Backend/Helpers/goldengrid"
 import BackendHeader from "@/src/app/components/Backend/header";
 import BackendFooter from "@/src/app/components/Backend/footer";
@@ -9,12 +9,12 @@ import BackendFooter from "@/src/app/components/Backend/footer";
 
 export default function Page() {
     return (
-        <div className="bg-adminGray min-h-screen flex flex-col">
+        <div className="bg-adminGray h-screen flex flex-col">
             <BackendHeader title="Analytics Dashboard" />
-            <main className="grow">
-                <Grid>
-                    <BackendMenu className="col-start-1 col-end-2" active="Analytics" />
-                    <NeumorphicFlat className="p-4 m-4">
+            <main className="grow h-full">
+                <Grid className="h-full">
+                    <BackendMenu className="col-start-1 col-end-3" active="Analytics" />
+                    <NeumorphicFlat className="p-4 m-4 col-start-4 col-end-7">
                         <section>
                             <h2>Overview</h2>
                             {/* Placeholder for overview stats */}
