@@ -31,7 +31,13 @@ select:-webkit-autofill:focus {
   html {
     @apply text-adminBlack;
   }
-};
+
+  button:hover {
+    @apply cursor-pointer
+  }
+}
+
+;
 
 @layer components {
   .softShadow {
@@ -48,7 +54,7 @@ select:-webkit-autofill:focus {
   }
 
   .neumorphicShadow {
-   box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
     transition: 0.04s box-shadow ease-in-out;
     background: #e0e0e0
   }
