@@ -41,7 +41,7 @@ select:-webkit-autofill:focus {
 
 @layer components {
   .softShadow {
-    @apply rounded-lg py-1 px-4 transition-shadow duration-[1s];
+    @apply rounded-lg py-1 px-4 transition-shadow duration-1000;
     box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
     transition: 0.04s box-shadow ease-in-out;
     background: #e0e0e0

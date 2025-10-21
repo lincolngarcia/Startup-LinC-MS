@@ -11,8 +11,8 @@ export default function Page() {
                 <NeumorphicFlat className="mb-[100px]">
                     <div className="flex flex-col justify-center items-center gap-4">
                         <p className="text-adminBlue font-bold text-xl border-b border-adminBlue">LinC-MS</p>
-                        <input placeholder  ="Username" className="softShadow text-p6 rounded-lg py-1 px-4 transition-shadow duration-[0.5s] text-black;" />
-                        <input placeholder="Password" className="softShadow text-p4 rounded-lg py-1 px-4 transition-shadow duration-[0.5s] text-black;" type="password" />
+                        <input placeholder  ="Username" className="softShadow text-p6 rounded-lg py-1 px-4 transition-shadow duration-500 text-black;" />
+                        <input placeholder="Password" className="softShadow text-p4 rounded-lg py-1 px-4 transition-shadow duration-500 text-black;" type="password" />
                         <button className="softShadow w-full" onClick={() => router.push("/admin/dashboard")}>Login</button>
                     </div>
                 </NeumorphicFlat>
