@@ -6,6 +6,7 @@ export default function Page() {
     return (
         <div className="min-w-screen">
             <div className="max-w-[1200px] m-auto p-4">
+                <a href="/login" className="text-2xl text-adminBlue border-adminBlack border-solid border-2 px-2 py-1 bg-adminGray rounded-lg font-bold">Login</a>
                 <Standard_FeatureStacked>
                     <Standard_FeatureStackedCard
                         image="/content-image.jpeg"
