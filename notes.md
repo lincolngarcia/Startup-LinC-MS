@@ -27,6 +27,10 @@ I didn't know how to do HTML comments in the Amplify with React context, but I f
 
 ## CSS
 
+TailwindCSS updated to version 4 recently. The children of a flex-grow (it itself being a child of flex-column) will not be able to reference height until its parent has a fixed height
+
 ## React Part 1: Routing
+
+While React likes to use Router(), NextJS prefers the <Link> convention.
 
 ## React Part 2: Reactivity
