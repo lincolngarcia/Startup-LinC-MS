@@ -14,16 +14,19 @@ export default function Page() {
     const router = useRouter();
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="h-screen flex flex-col">
             <BackendHeader title="Dashboard" />
             <main className="h-full bg-adminGray grow">
-                <Grid>
+                <Grid className="h-full">
                     <BackendMenu className="col-start-1 col-end-2" active="Home" />
-                    <NeumorphicFlat className="col-start-8 col-end-13 h-full">
+                    <NeumorphicFlat className="h-full lg:col-start-7 lg:col-end-13 flex flex-col">
                         <h3>Editor</h3>
-                        <div className="h-4/5">
-                            <textarea className="h-4/5 w-full" placeholder="write content here"></textarea>
-                            <input placeholder="edit"></input><NeumorphicFlat><button className="w-full">upload</button></NeumorphicFlat>
+                        <div className="grow flex flex-col">
+                            <textarea className="w-full" placeholder="write content here"></textarea>
+                            <div className="grow">
+                                <input placeholder="edit"></input>
+                            </div>
+                            <NeumorphicFlat><button className="w-full">upload</button></NeumorphicFlat>
                         </div>
                         <div className="flex justify-between mt-2">
                             <NeumorphicFlat><button>Edit Pages</button></NeumorphicFlat>
@@ -35,7 +38,7 @@ export default function Page() {
                             <NeumorphicFlat><button className="w-full" onClick={() => router.push("/")}>View Live Site</button></NeumorphicFlat>
                         </div>
                     </NeumorphicFlat>
-                </Grid >
+                </Grid>
             </main>
             <BackendFooter />
         </div>
