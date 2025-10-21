@@ -2,11 +2,11 @@
 
 @theme {
   --color-adminBlack: #333333;
-  --color-adminSuperGray: "#777777";
-  --color-adminDarkGray: "#ACACAC";
-  --color-adminGray: "#e0e0e0";
-  --color-adminBlue: "#1432FF";
-  --color-adminRed: "#E84B57";
+  --color-adminSuperGray: #777777;
+  --color-adminDarkGray: #ACACAC;
+  --color-adminGray: #e0e0e0;
+  --color-adminBlue: #1432FF;
+  --color-adminRed: #E84B57;
 }
 
 input {
