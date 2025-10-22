@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Import Components
 import Grid from '../../app/components/Backend/Helpers/goldengrid';
@@ -16,8 +16,13 @@ import BackendPreview from '@/src/app/components/Backend/preview';
 export default function Page() {
     const router = useRouter();
     const [newPageModal, renderNewPageModal] = useState(false);
-    const [activePage, setActivePage] = useState("/")
     const [pageSelectorModal, renderPageSelectorModal] = useState(false);
+    const [deletePageModal, renderDeletePageModal] = useState(false)
+    const [activePage, setActivePage] = useState("/")
+    
+    useEffect(() => {
+        document.title = `${activePage.split("/").pop()} | LinC`;
+    }, [activePage])
 
     return (
         <div className="h-screen flex flex-col">
@@ -69,7 +74,7 @@ export default function Page() {
                         </div>
                         <div className="flex justify-between mt-2">
                             <NeumorphicFlat><button onClick={() => renderPageSelectorModal(true)}>Select Page</button></NeumorphicFlat>
-                            <NeumorphicFlat><button>Delete Pages</button></NeumorphicFlat>
+                            <NeumorphicFlat><button onClick={() => renderDeletePageModal(true)}>Delete Pages</button></NeumorphicFlat>
                             <NeumorphicFlat ><button onClick={() => renderNewPageModal(true)}>New Page</button></NeumorphicFlat>
                         </div>
                         <div>
