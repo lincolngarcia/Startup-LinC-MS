@@ -34,3 +34,6 @@ TailwindCSS updated to version 4 recently. The children of a flex-grow (it itsel
 While React likes to use Router(), NextJS prefers the <Link> convention.
 
 ## React Part 2: Reactivity
+
+useEffect is cool, however I still prefer to use VueJS's emit and dynamic prop properties
+
