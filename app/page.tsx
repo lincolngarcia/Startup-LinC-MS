@@ -1,65 +1,41 @@
-'use client';
+"use client";
 
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
+import React from 'react';
+import Link from 'next/link';
+import { Login } from './login/page';
+import Play from './play/page';
+import { Scores } from './scores/page';
+import { About } from './about/page';
+import { AuthState } from './login/authState';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './app.css';
 
-import { Amplify } from "aws-amplify";
-import outputs from "@/amplify_outputs.json";
+export default function Page() {
 
-import "./app.css"
+  const [userName, setUserName] = React.useState('');
+  const [authState, setAuthState] = React.useState<AuthState>(AuthState.Unknown);
 
-Amplify.configure(outputs);
-const client = generateClient<Schema>();
+  React.useEffect(() => {
+    const name = typeof window !== 'undefined' ? localStorage.getItem('userName') || '' : '';
+    setUserName(name);
+    setAuthState(name ? AuthState.Authenticated : AuthState.Unauthenticated);
+  }, []);
 
-export default function App() {
   return (
-    <main className="bg-dark text-light">
-      {/*<title>Welcome to Simon</title>*/}
-      <header className="container-fluid">
-        <nav className="navbar fixed-top navbar-dark">
-          <a className="navbar-brand" href="#">Simon<sup>&reg;</sup></a>
-          <menu className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link active" href="/">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="play">Play</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="scores">Scores</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="about">About</a>
-            </li>
-          </menu>
-        </nav>
-      </header>
-
-      <main className="container-fluid bg-secondary text-center">
-        <div>
-          <h1>Welcome to Simon</h1>
-          <form method="get" action="play">
-            <div className="input-group mb-3">
-              <span className="input-group-text">@</span>
-              <input className="form-control" type="text" placeholder="your@email.com" />
-            </div>
-            <div className="input-group mb-3">
-              <span className="input-group-text">🔒</span>
-              <input className="form-control" type="password" placeholder="password" />
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-            <button type="submit" className="btn btn-secondary">Create</button>
-          </form>
-        </div>
-      </main>
-
-      <footer className="bg-dark text-white-50">
-        <div className="container-fluid">
-          <span className="text-reset">Author Name(s)</span>
-          <a className="text-reset" href="https://github.com/webprogramming260/simon-css">Source</a>
-        </div>
-      </footer>
-
+    <main>
+      {/* Render the Login UI on the root route. Other pages are handled by their own files under /app */}
+      <Login
+        userName={userName}
+        authState={authState}
+        onAuthChange={(newUserName: string, newAuthState: AuthState) => {
+          setAuthState(newAuthState);
+          setUserName(newUserName);
+          if (typeof window !== 'undefined') {
+            if (newUserName) localStorage.setItem('userName', newUserName);
+            else localStorage.removeItem('userName');
+          }
+        }}
+      />
     </main>
   );
 }

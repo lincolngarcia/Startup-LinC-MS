@@ -1,0 +1,18 @@
+{
+  "title": "Example Post",
+  "date": "2013-09-03T06:00:00.000Z",
+  "body": {
+    "raw": "\n## The test was successful\n\n![content-images](/content-image.jpeg \"Image Title\")",
+    "html": "<h2>The test was successful</h2>\n<p><img src=\"/content-image.jpeg\" alt=\"content-images\" title=\"Image Title\"></p>"
+  },
+  "_id": "post-01.md",
+  "_raw": {
+    "sourceFilePath": "post-01.md",
+    "sourceFileName": "post-01.md",
+    "sourceFileDir": ".",
+    "contentType": "markdown",
+    "flattenedPath": "post-01"
+  },
+  "type": "Post",
+  "url": "/posts/post-01"
+}
