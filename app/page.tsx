@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Login } from './login/page';
+import { Login } from './_login/page';
 import Play from './play/page';
-import { Scores } from './scores/page';
-import { About } from './about/page';
-import { AuthState } from './login/authState';
+//import { Scores } from './scores/page';
+//import { About } from './about/page';
+import { AuthState } from './_login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 

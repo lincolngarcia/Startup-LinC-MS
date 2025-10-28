@@ -6,7 +6,7 @@ import "./app.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation"
 import React from "react";
-import { AuthState } from "./login/authState";
+import { AuthState } from "./_login/authState";
 
 const inter = Inter({ subsets: ["latin"] });
 

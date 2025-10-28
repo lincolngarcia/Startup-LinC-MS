@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { useEffect } from 'react';
+
 import { Button } from 'react-bootstrap';
 import { SimonButton } from './simonButton';
 import { delay } from './delay';
@@ -11,7 +13,9 @@ import './simonGame.css';
 export function SimonGame(props) {
   const userName = props.userName;
   const buttons = new Map();
-  const mistakeSound = document.querySelector("#error") //new Audio(`/error.mp3`);
+  let mistakeSound;;
+  
+  useEffect(() => mistakeSound = document.querySelector("#error")) //new Audio(`/error.mp3`);
 
   const [allowPlayer, setAllowPlayer] = React.useState(false);
   const [sequence, setSequence] = React.useState([]);

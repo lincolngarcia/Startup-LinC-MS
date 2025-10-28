@@ -4,7 +4,7 @@ import React from 'react';
 
 import './scores.css';
 
-export default function Scores() {
+export default function Page() {
   const [scores, setScores] = React.useState([]);
 
   // Demonstrates calling a service asynchronously so that
