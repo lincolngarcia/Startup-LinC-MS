@@ -1,0 +1,14 @@
+{
+    "pagesettings": {},
+    "pagedata": {
+        "componentname": "Homepage",
+        "props": {
+            "title": "Welcome to Our Website",
+            "subtitle": "Your gateway to amazing content",
+            "backgroundImage": "https://example.com/images/homepage-bg.jpg",
+            "callToActionText": "Get Started",
+            "callToActionLink": "/get-started"
+        },
+        "children": []
+    }
+}
