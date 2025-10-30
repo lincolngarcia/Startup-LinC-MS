@@ -1,5 +1,6 @@
 import Grid from "./../../Backend/Helpers/goldengrid";
-export default function Standard_IntroStacked({title, hook, paragraph}: {title: string, hook: string, paragraph: string}) {
+
+function Standard_IntroStacked({title, hook, paragraph}: {title: string, hook: string, paragraph: string}) {
     return (
         <Grid className="container pt-16 md:pt-18 pb-14 md:pb:12 lg:pb-24">
             {/*<div className="col-start-1 col-end-5 md:col-end-13">breadcrumbs</div>*/}
@@ -10,3 +11,14 @@ export default function Standard_IntroStacked({title, hook, paragraph}: {title: 
         </Grid>
     )
 }
+
+const bindings = {
+    children: false,
+    props: {
+        title: "short string",
+        hook: "short string",
+        paragraph: "short string"
+    }
+}
+
+export default [Standard_IntroStacked, bindings]

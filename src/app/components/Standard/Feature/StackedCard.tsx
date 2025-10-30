@@ -1,8 +1,9 @@
 import { AnyARecord } from "node:dns";
 import StandardAction from "../../Standard/Helper/Action";
 import Image from "next/image";
+import { Children } from "react";
 
-export default function Standard_FeatureStackedCard(
+function Standard_FeatureStackedCard(
     {action="", description, image, title}: 
     { action?: string, description: any, image: string, title: string}) {
 
@@ -23,3 +24,15 @@ export default function Standard_FeatureStackedCard(
         </div>
     )
 }
+
+const bindings = {
+    children: false,
+    props: {
+        action: "short string", 
+        description: "short string", 
+        image: "short string", 
+        title: "short string"
+    }
+}
+
+export default [Standard_FeatureStackedCard, bindings]
