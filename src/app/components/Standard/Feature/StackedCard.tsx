@@ -1,9 +1,10 @@
+import { AnyARecord } from "node:dns";
 import StandardAction from "../../Standard/Helper/Action";
 import Image from "next/image";
 
-export default function StandardFeatureStackedCard(
+export default function Standard_FeatureStackedCard(
     {action="", description, image, title}: 
-    { action?: string, description: React.ReactNode, image: string, title: string}) {
+    { action?: string, description: any, image: string, title: string}) {
 
     return (
         <div className="mt-4 mb-6 w-128">
