@@ -2,12 +2,12 @@
 
 // Import Component Libraries
 import { useEffect, useState } from "react"
-import StandardExports from "../app/components/Standard/Standard"
+import StandardExports from "../components/Standard/Standard"
 
-import pagedata from "@/database/homepage.json"
+import pagedata from "@/database/_.json"
 
-import RootLayout from "./layout"
-import "../app/global.css"
+import RootLayout from "../../pages/layout"
+import "../../app/global.css"
 
 export default function Page() {
     const library: any = {

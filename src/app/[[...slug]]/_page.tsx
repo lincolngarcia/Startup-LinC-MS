@@ -1,6 +1,6 @@
-import RootLayout from "../pages/layout"
-import Standard_FeatureStacked from "./components/Standard/Feature/Stacked";
-import Standard_FeatureStackedCard from "./components/Standard/Feature/StackedCard";
+import RootLayout from "../../pages/layout"
+import Standard_FeatureStacked from "./../components/Standard/Feature/Stacked";
+import Standard_FeatureStackedCard from "./../components/Standard/Feature/StackedCard";
 
 export default function Page() {
     return (
