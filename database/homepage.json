@@ -1,14 +1,30 @@
 {
-    "pagesettings": {},
-    "pagedata": {
-        "componentname": "Homepage",
-        "props": {
-            "title": "Welcome to Our Website",
-            "subtitle": "Your gateway to amazing content",
-            "backgroundImage": "https://example.com/images/homepage-bg.jpg",
-            "callToActionText": "Get Started",
-            "callToActionLink": "/get-started"
-        },
-        "children": []
-    }
+    "children": [
+        {
+            "componentTag": "standard_featurestacked",
+            "children": [
+                {
+                    "componentTag": "standard_featurestackedcard",
+                    "children": [],
+                    "props": {
+                        "image": "/content-image.jpeg",
+                        "title": "Welcome to the Homepage",
+                        "action": "Learn more",
+                        "description": "This is a description.It descripts.Que mas quiere que te diga?"
+                    }
+                },
+                {
+                    "componentTag": "standard_featurestackedcard",
+                    "children": [],
+                    "props": {
+                        "image": "/content-image.jpeg",
+                        "title": "Welcome to the Homepage",
+                        "action": "Learn more",
+                        "description": "This is a description.It descripts.Que mas quiere que te diga?"
+                    }
+                }
+            ],
+            "props": {}
+        }
+    ]
 }
