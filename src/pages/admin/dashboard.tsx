@@ -63,7 +63,7 @@ export default function Page() {
             <main className="h-full bg-adminGray grow">
                 <Grid className="h-full">
                     <BackendMenu className="col-start-1 col-end-2" active="Home" />
-                    <BackendPreview className="col-start-3 col-end-9 border" src={activePage}/>
+                    <BackendPreview className="col-start-3 col-end-9 border" pagedata={activePage}/>
                     <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
                         <h3>Editor</h3>
                         <div className="grow flex flex-col">
