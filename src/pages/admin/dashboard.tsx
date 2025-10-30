@@ -12,6 +12,7 @@ import BackendHeader from '@/src/app/components/Backend/header';
 import BackendFooter from '@/src/app/components/Backend/footer';
 import BackendModal from '@/src/app/components/Backend/modal';
 import BackendPreview from '@/src/app/components/Backend/preview';
+import BackendEditor from '@/src/app/components/Backend/editor';
 
 export default function Page() {
     const router = useRouter();
@@ -98,12 +99,7 @@ export default function Page() {
                     <BackendPreview className="col-start-3 col-end-9 border" pagedata={pagedata} />
                     <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
                         <h3>Editor</h3>
-                        <div className="grow flex flex-col">
-                            <textarea className="w-full" placeholder="write content here"></textarea>
-                            <div className="grow">
-                                <input placeholder="edit"></input>
-                            </div>
-                        </div>
+                        <BackendEditor pagedata={pagedata} setPagedata={setPagedata}/>
                         <div className="flex justify-between mt-2">
                             <NeumorphicFlat><button onClick={() => renderPageSelectorModal(true)}>Select Page</button></NeumorphicFlat>
                             <NeumorphicFlat><button onClick={() => renderDeletePageModal(true)}>Delete Pages</button></NeumorphicFlat>
