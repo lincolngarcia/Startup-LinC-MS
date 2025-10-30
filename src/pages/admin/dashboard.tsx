@@ -18,11 +18,43 @@ export default function Page() {
     const [newPageModal, renderNewPageModal] = useState(false);
     const [pageSelectorModal, renderPageSelectorModal] = useState(false);
     const [deletePageModal, renderDeletePageModal] = useState(false)
-    const [activePage, setActivePage] = useState("/")
-    
+    const [pagedata, setPagedata] = useState({})
+
+    // set the data by default
     useEffect(() => {
-        document.title = `${activePage.split("/").pop()} | LinC`;
-    }, [activePage])
+        setTimeout(() => {
+            setPagedata({
+                "children": [
+                    {
+                        "componentTag": "standard_featurestacked",
+                        "children": [
+                            {
+                                "componentTag": "standard_featurestackedcard",
+                                "children": [],
+                                "props": {
+                                    "image": "/content-image.jpeg",
+                                    "title": "Welcome to the Homepage",
+                                    "action": "Learn more",
+                                    "description": "This is a description.It descripts.Que mas quiere que te diga?"
+                                }
+                            },
+                            {
+                                "componentTag": "standard_featurestackedcard",
+                                "children": [],
+                                "props": {
+                                    "image": "/content-image.jpeg",
+                                    "title": "Welcome to the Homepage",
+                                    "action": "Learn more",
+                                    "description": "This is a description.It descripts.Que mas quiere que te diga?"
+                                }
+                            }
+                        ],
+                        "props": {}
+                    }
+                ]
+            })
+        }, 4000)
+    }, [])
 
     return (
         <div className="h-screen flex flex-col">
@@ -36,12 +68,12 @@ export default function Page() {
                     </p>
 
                     <div className="flex justify-end space-x-4">
-                        <button 
+                        <button
                             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
                             onClick={() => renderNewPageModal(false)}>
                             Cancel
                         </button>
-                        <button 
+                        <button
                             className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                             onClick={() => renderNewPageModal(false)}>
                             Confirm
@@ -63,7 +95,7 @@ export default function Page() {
             <main className="h-full bg-adminGray grow">
                 <Grid className="h-full">
                     <BackendMenu className="col-start-1 col-end-2" active="Home" />
-                    <BackendPreview className="col-start-3 col-end-9 border" pagedata={activePage}/>
+                    <BackendPreview className="col-start-3 col-end-9 border" pagedata={pagedata} />
                     <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
                         <h3>Editor</h3>
                         <div className="grow flex flex-col">
