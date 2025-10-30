@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 export default function Page() {
     useEffect(() => {
         window.addEventListener('message', (event) => {
-            console.log(event)
             setPageData(event.data)
         })
     }, [])
