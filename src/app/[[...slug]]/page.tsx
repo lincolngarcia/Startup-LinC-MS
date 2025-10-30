@@ -14,14 +14,14 @@ export default function Page() {
         ...StandardExports
     }
 
-    function renderChildren(parent: any): React.ReactNode {
+    function renderChildren(parent: any, parentKey="component-"): React.ReactNode {
         console.log(`rendering parent:`, parent)
         return parent.map((component: any, index: number) => {
             const Tag = library[component.componentTag];
-
+            const key = `${parentKey}-${index}`;
             if (Tag) {
-                return <Tag {...component.props}>
-                    {parent.map((child: any) => renderChildren(child.children))}
+                return <Tag key={key} {...component.props}>
+                    {parent.map((child: any) => renderChildren(child.children, key))}
                 </Tag>
             }
         })
