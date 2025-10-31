@@ -45,15 +45,15 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
             const inputs: any = []
             const type = Library[component.componentTag][1];
 
-            if (type.children) inputs.push(
-                <textarea
-                    key={`children-${currentPath.join("-")}`}
-                    data-path={JSON.stringify(currentPath)}
-                    data-prop="__children__"
-                    placeholder="this element has children"
-                    onChange={handleInputChange}
-                />
-            )
+            // if (type.children) inputs.push(
+            //     <textarea
+            //         key={`children-${currentPath.join("-")}`}
+            //         data-path={JSON.stringify(currentPath)}
+            //         data-prop="__children__"
+            //         placeholder="this element has children"
+            //         onChange={handleInputChange}
+            //     />
+            // )
 
             inputs.push(...Object.entries(type.props).map(([propname, proptype]: any) => {
                 return (
