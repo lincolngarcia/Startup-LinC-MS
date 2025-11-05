@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import RootLayout from "../layout";
+=======
+import RootLayout from "@/src/app/layout";
+>>>>>>> fe89115e7885ce53467a022bf75a3bb66ff6884f
 import DynamicRender from "@/src/app/components/Backend/Helpers/dyanmicrender";
 import { useEffect, useState } from "react";
 

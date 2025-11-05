@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+"use client";
+
+>>>>>>> fe89115e7885ce53467a022bf75a3bb66ff6884f
 // Import Component Libraries
 import { useEffect, useState } from "react"
 
@@ -5,7 +10,11 @@ import DynamicRender from "@/src/app/components/Backend/Helpers/dyanmicrender"
 
 import pagedata from "@/database/_.json"
 
+<<<<<<< HEAD
 import RootLayout from "../../pages/layout"
+=======
+import RootLayout from "@/src/app/layout"
+>>>>>>> fe89115e7885ce53467a022bf75a3bb66ff6884f
 import "../../app/global.css"
 
 export default function Page() {
