@@ -1,3 +1,5 @@
+"use client";
+
 // Import Component Libraries
 import { useEffect, useState } from "react"
 
