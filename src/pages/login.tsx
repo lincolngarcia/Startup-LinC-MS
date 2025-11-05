@@ -1,4 +1,4 @@
-import RootLayout from "./layout"
+import RootLayout from "@/src/app/layout"
 import { Router, useRouter } from "next/router"
 import NeumorphicFlat from "../app/components/Backend/Neumorphic/flat";
 

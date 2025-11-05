@@ -1,4 +1,4 @@
-import RootLayout from "../layout"
+import RootLayout from "@/src/app/layout"
 import NeumorphicFlat from "@/src/app/components/Backend/Neumorphic/flat"
 import NeumorphicPressed from "@/src/app/components/Backend/Neumorphic/pressed"
 import BackendMenu from "@/src/app/components/Backend/menu";

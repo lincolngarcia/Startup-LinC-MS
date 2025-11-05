@@ -7,7 +7,7 @@ import NeumorphicPressed from '../../app/components/Backend/Neumorphic/pressed';
 import BackendMenu from '../../app/components/Backend/menu';
 
 import NeumorphicFlat from '@/src/app/components/Backend/Neumorphic/flat';
-import RootLayout from '../layout';
+import RootLayout from "@/src/app/layout"
 import BackendHeader from '@/src/app/components/Backend/header';
 import BackendFooter from '@/src/app/components/Backend/footer';
 import BackendModal from '@/src/app/components/Backend/modal';
