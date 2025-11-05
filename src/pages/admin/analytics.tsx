@@ -19,6 +19,10 @@ export default function Page() {
                 console.log('Analytics Data:',  data);
             })
         }, [])
+    
+    function analyticsParser() {
+        return null;
+    }
 
     return (
         <div className="bg-adminGray h-screen flex flex-col">
