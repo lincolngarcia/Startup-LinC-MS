@@ -1,3 +1,5 @@
+"use client";
+
 // Import Component Libraries
 import { useEffect, useState } from "react"
 
@@ -5,7 +7,7 @@ import DynamicRender from "@/src/app/components/Backend/Helpers/dyanmicrender"
 
 import pagedata from "@/database/_.json"
 
-import RootLayout from "../../pages/layout"
+import RootLayout from "@/src/app/layout"
 import "../../app/global.css"
 
 export default function Page() {

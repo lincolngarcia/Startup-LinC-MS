@@ -1,13 +1,29 @@
-import RootLayout from "../layout"
+"use client";
+
+import RootLayout from "@/src/app/layout"
 import NeumorphicFlat from "@/src/app/components/Backend/Neumorphic/flat"
 import NeumorphicPressed from "@/src/app/components/Backend/Neumorphic/pressed"
 import BackendMenu from "@/src/app/components/Backend/menu";
 import Grid from "@/src/app/components/Backend/Helpers/goldengrid"
 import BackendHeader from "@/src/app/components/Backend/header";
 import BackendFooter from "@/src/app/components/Backend/footer";
+import { useEffect } from "react";
 
 
 export default function Page() {
+    useEffect( () => {
+        // Fetch analytics data from the API
+        fetch('http://localhost:3000/api/analytics')
+            .then(data => data.json())
+            .then(data => {
+                console.log('Analytics Data:',  data);
+            })
+        }, [])
+    
+    function analyticsParser() {
+        return null;
+    }
+
     return (
         <div className="bg-adminGray h-screen flex flex-col">
             <BackendHeader title="Analytics Dashboard" />
