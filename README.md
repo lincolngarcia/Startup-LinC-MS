@@ -120,6 +120,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **All functionality implemented or mocked out** - It is, mock data is used throughout the application where functionality is needed
 - [x] **Hooks** - Please see the dashboard for this data, both useEffect and useState are used.
 
+For this deliverable, be sure to visit the /admin/dashboard route. This is where the bulk of the project is. There is some test data for how the CMS will work, However, it will not save nor are there any way to manipulate pages (that comes in the database step)
+
 ## 🚀 Service deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
