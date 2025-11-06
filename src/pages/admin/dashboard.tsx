@@ -95,7 +95,7 @@ export default function Page() {
             <BackendHeader title="Dashboard" />
             <main className="h-full bg-adminGray grow">
                 <Grid className="h-full">
-                    <BackendMenu className="col-start-1 col-end-2" active="Home" />
+                    <BackendMenu className="col-start-1 col-end-3" active="Home" />
                     <BackendPreview className="col-start-3 col-end-9 border" pagedata={pagedata} />
                     <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
                         <h3>Editor</h3>
