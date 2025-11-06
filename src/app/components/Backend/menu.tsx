@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function BackendMenu({className = '', active}: {active: string, className?: string}) {
     const classes = [className].join(" ");
     return (
-        <NeumorphicFlat className={classes + "col-start-2 col-end-3 p-4"}>
+        <NeumorphicFlat className={classes}>
             <nav>
                 <ul className="text-xl">
                     <li className="my-3"><NeumorphicPressed active={(active == "Home")} ><Link href="/admin/dashboard">Home</Link></NeumorphicPressed></li>
