@@ -14,6 +14,9 @@ import BackendModal from '@/src/app/components/Backend/modal';
 import BackendPreview from '@/src/app/components/Backend/preview';
 import BackendEditor from '@/src/app/components/Backend/editor';
 
+// Delete later
+import page from "@/database/_.json"
+
 export default function Page() {
     const router = useRouter();
     const [newPageModal, renderNewPageModal] = useState(false);
@@ -24,36 +27,8 @@ export default function Page() {
     // set the data by default
     useEffect(() => {
         setTimeout(() => {
-            setPagedata({
-                "children": [
-                    {
-                        "componentTag": "standard_featurestacked",
-                        "children": [
-                            {
-                                "componentTag": "standard_featurestackedcard",
-                                "children": [],
-                                "props": {
-                                    "image": "/content-image.jpeg",
-                                    "title": "Welcome to the Homepage",
-                                    "action": "Learn more",
-                                    "description": "This is a description.It descripts.Que mas quiere que te diga?"
-                                }
-                            },
-                            {
-                                "componentTag": "standard_featurestackedcard",
-                                "children": [],
-                                "props": {
-                                    "image": "/content-image.jpeg",
-                                    "title": "Welcome to the Homepage",
-                                    "action": "Learn more",
-                                    "description": "This is a description.It descripts.Que mas quiere que te diga?"
-                                }
-                            }
-                        ],
-                        "props": {}
-                    }
-                ]
-            })
+            console.log(page)
+            setPagedata(page)
         }, 4000)
     }, [])
 
