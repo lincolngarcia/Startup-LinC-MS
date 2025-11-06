@@ -38,6 +38,7 @@ export default function Page() {
     useEffect(() => {
         // Fetch analytics data from the API
         fetch('/api/analytics?type=UNQ')
+            .then(data => data.json())
             .then((uncleanData: any) => {
                 let labels: any = getLast7Dates();
                 let data: any = [0, 0, 0, 0, 0, 0, 0];

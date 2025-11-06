@@ -27,8 +27,8 @@ export default async function handler(
 
 async function runUNQReport() {
   const credentials = {
-    "private_key": process.env.ga4_private_key,
-    "client_email": process.env.ga4_client_email,
+    "private_key": process.env.GA4_PRIVATE_KEY,
+    "client_email": process.env.GA4_CLIENT_EMAIL,
   }
 
   const analyticsDataClient = new BetaAnalyticsDataClient({
@@ -66,8 +66,8 @@ async function runUNQReport() {
 
 async function runCitiesSReport() {
   const credentials = {
-    "private_key": process.env.ga4_private_key,
-    "client_email": process.env.ga4_client_email,
+    "private_key": process.env.GA4_PRIVATE_KEY,
+    "client_email": process.env.GA4_CLIENT_EMAIL,
   }
 
   const analyticsDataClient = new BetaAnalyticsDataClient({
@@ -92,8 +92,6 @@ async function runCitiesSReport() {
       },
     ],
   });
-
-  console.log('Report result:', response);
 
   if (!response.rows) return { "error": "No data found" };
   response.rows.forEach(row => {
