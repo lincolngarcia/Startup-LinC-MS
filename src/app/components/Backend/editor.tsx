@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Library from "../library";
 import { useEffect } from "react";
+import { contentDirExcludeDefault } from "contentlayer/source-files";
 
 export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any, setPagedata: any }) {
     useEffect(() => {
@@ -12,7 +13,7 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
         return <p>Select a page.</p>
     }
 
-    function handleInputChange (event: any) {
+    function handleInputChange(event: any) {
         const target = event.target as HTMLInputElement | HTMLTextAreaElement;
         const pathStr = target.dataset.path;
         const prop = target.dataset.prop;
@@ -33,44 +34,61 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
             node = node.children[idx];
         }
 
-        node.props = node.props || {};
-        node.props[prop] = value;
+        if (node.props) {
+            node.props = node.props || {};
+            node.props[prop] = value;
+        }else if (node.content) {
+            node.content = value
+        }
 
         setPagedata(newPagedata);
     }
 
     function dynamicRenderTypes(parent: any, path: number[] = []): React.ReactNode {
         return parent.flatMap((component: any, index: number) => {
+
+            console.log(component, index)
+
             const currentPath = [...path, index];
             const inputs: any = []
-            const type = Library[component.componentTag][1];
+            
+            if (component.componentTag) {
+                const type = Library[component.componentTag][1];
+                inputs.push(...Object.entries(type.props).map(([propname, proptype]: any) => {
+                    return (
+                        <div className="pb-1" key={`${component.componentTag}-${currentPath.join("-")}-${propname}`}>
+                            <label className="p-1">{component.componentTag}</label>
+                            <input
+                                className="border"
+                                placeholder={propname}
+                                type="text"
+                                data-path={JSON.stringify(currentPath)}
+                                data-prop={propname}
+                                value={component.props?.[propname] ?? ""}
+                                onChange={handleInputChange}
+                            /><br />
+                        </div>
+                    )
+                }))
+            }
 
-            // if (type.children) inputs.push(
-            //     <textarea
-            //         key={`children-${currentPath.join("-")}`}
-            //         data-path={JSON.stringify(currentPath)}
-            //         data-prop="__children__"
-            //         placeholder="this element has children"
-            //         onChange={handleInputChange}
-            //     />
-            // )
-
-            inputs.push(...Object.entries(type.props).map(([propname, proptype]: any) => {
+            if (component.content) {
                 return (
-                    <div className="pb-1" key={`${component.componentTag}-${currentPath.join("-")}-${propname}`}>
-                        <label className="p-1">{component.componentTag}</label>
+                    <div className="pb-1" key={`content-${currentPath.join("-")}`}>
+                        <label className="p-1">Text</label>
                         <input
-                            className="border-1"
-                            placeholder={propname}
+                            className="border"
+                            placeholder="text"
                             type="text"
                             data-path={JSON.stringify(currentPath)}
-                            data-prop={propname}
-                            value={component.props?.[propname] ?? ""}
+                            data-prop="text"
+                            value={component.content}
                             onChange={handleInputChange}
                         /><br />
                     </div>
                 )
-            }))
+            }
+
 
             if (component.children && component.children.length) {
                 inputs.push(
