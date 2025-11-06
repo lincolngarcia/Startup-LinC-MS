@@ -37,19 +37,20 @@ export default function Page() {
 
     useEffect(() => {
         // Fetch analytics data from the API
-        const UNQ_Data = fetch('/api/analytics?UNQ=true')
+        fetch('/api/analytics?type=UNQ')
             .then(data => data.json())
             .then((uncleanData: any) => {
                 let labels: any = getLast7Dates();
                 let data: any = [0, 0, 0, 0, 0, 0, 0];
                 let max: any = 0
+                let length:any = uncleanData.rows.length
 
-                uncleanData.message.rows.map(((element: any, index: number) => {
-                    labels[6 - index] = dateParse(element.dimensionValues[0].value)
+                uncleanData.rows.map((element: any, index: number) => {
+                    labels[(7 - length) + index] = dateParse(element.dimensionValues[0].value)
                     let value = element.metricValues[0].value;
-                    data[6 - index] = value;
+                    data[(7 - length) + index] = value;
                     if (value > max) max = value;
-                }))
+                })
 
                 const UNQ_canvas: any = document.getElementById("UQV_week");
                 const UNQ_Chart = new Chart(UNQ_canvas, {
@@ -74,22 +75,28 @@ export default function Page() {
                 setCharts({ ...charts, "UNQ_Chart": UNQ_Chart });
             })
 
-        const Cities_Data = fetch('/api/analytics')
+        fetch('/api/analytics?type=CITIES')
             .then(data => data.json())
             .then((uncleanData: any) => {
+                let labels: any = []
+                let data: any = [];
+                let colors: any = []
+
+                uncleanData.rows.map((element: any, index: number) => {
+                    labels.push(element.dimensionValues[0].value)
+                    data.push(element.metricValues[0].value)
+                    colors.push(getRandomColor())
+                })
+
                 const cities_canvas: any = document.getElementById("cities_overall");
                 const Cities_Chart = new Chart(cities_canvas, {
                     type: 'doughnut',
                     data: {
-                        labels: ["Provo, UT", "Chapell Hill, NC", "Houston, TX"],
+                        labels,
                         datasets: [{
                             label: 'Most Popular Cities',
-                            data: ["43", "67", "84"],
-                            backgroundColor: [
-                                'rgb(255, 99, 132)',
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
-                            ],
+                            data,
+                            backgroundColor: colors,
                             hoverOffset: 4
                         }]
                     }
@@ -152,3 +159,10 @@ const getLast7Dates = () => {
     }
     return dates;
 }
+
+const getRandomColor = () => {
+    const hue = Math.floor(Math.random() * 360);
+    const saturation = Math.floor(Math.random() * 30) + 70; // 70-100%
+    const lightness = Math.floor(Math.random() * 20) + 40;  // 40-60%
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+};
