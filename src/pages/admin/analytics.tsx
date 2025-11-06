@@ -38,8 +38,7 @@ export default function Page() {
     useEffect(() => {
         // Fetch analytics data from the API
         fetch('/api/analytics?type=UNQ')
-            .then(data => console.log(data.text()))
-           /* .then((uncleanData: any) => {
+            .then((uncleanData: any) => {
                 let labels: any = getLast7Dates();
                 let data: any = [0, 0, 0, 0, 0, 0, 0];
                 let max: any = 0
@@ -68,13 +67,13 @@ export default function Page() {
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: Math.ceil(max * 1.25) 
+                                max: Math.ceil(max * 1.25)
                             }
                         }
                     }
                 })
                 setCharts({ ...charts, "UNQ_Chart": UNQ_Chart });
-            }) */ return;
+            })
 
         fetch('/api/analytics?type=CITIES')
             .then(data => data.json())

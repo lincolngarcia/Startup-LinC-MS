@@ -12,6 +12,14 @@ export default async function handler(
   if (!req.query) res.status(200)
   if (!req.query.type) res.status(200);
   let report;
+
+  res.status(200).send(`
+    Here is the data:
+    process: ${process}
+    process.env: ${process.env}
+    
+    `)
+
   switch (req.query.type) {
     case "UNQ":
       report = await runUNQReport();
