@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import { BetaAnalyticsDataClient } from "@google-analytics/data"
+import { secret } from "@aws-amplify/backend"
 
 const propertyId = '511603332';
 
@@ -8,7 +9,6 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
 
-  console.log(req.query)
   if (!req.query) res.status(200)
   if (!req.query.type) res.status(200);
   let report;
@@ -26,9 +26,9 @@ export default async function handler(
 }
 
 async function runUNQReport() {
-  const credentials = {
-    "private_key": process.env.REACT_APP_GA4_PRIVATE_KEY,
-    "client_email": process.env.REACT_APP_GA4_CLIENT_EMAIL,
+  const credentials: any = {
+    "private_key": secret("ga4_private_key"),
+    "client_email": secret("ga4_client_email")
   }
 
   const analyticsDataClient = new BetaAnalyticsDataClient({
@@ -65,9 +65,9 @@ async function runUNQReport() {
 }
 
 async function runCitiesSReport() {
-  const credentials = {
-    "private_key": process.env.REACT_APP_GA4_PRIVATE_KEY,
-    "client_email": process.env.REACT_APP_GA4_CLIENT_EMAIL,
+  const credentials: any = {
+    "private_key": secret("ga4_private_key"),
+    "client_email": secret("ga4_client_email")
   }
 
   const analyticsDataClient = new BetaAnalyticsDataClient({
