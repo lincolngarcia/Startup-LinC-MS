@@ -38,19 +38,19 @@ export default function Page() {
     useEffect(() => {
         // Fetch analytics data from the API
         fetch('/api/analytics?type=UNQ')
-            .then(data => {console.log(data.text()); return data;})
-            .then(data => data.json())
-            .then((uncleanData: any) => {
+            .then(data => console.log(data.text()))
+           /* .then((uncleanData: any) => {
                 let labels: any = getLast7Dates();
                 let data: any = [0, 0, 0, 0, 0, 0, 0];
                 let max: any = 0
-                let length:any = uncleanData.rows.length
 
                 uncleanData.rows.map((element: any, index: number) => {
-                    labels[(7 - length) + index] = dateParse(element.dimensionValues[0].value)
+                    labels[7 - index] = dateParse(element.dimensionValues[0].value)
                     let value = element.metricValues[0].value;
-                    data[(7 - length) + index] = value;
+                    data[7 - index] = value;
                     if (value > max) max = value;
+
+                    console.log(element)
                 })
 
                 const UNQ_canvas: any = document.getElementById("UQV_week");
@@ -74,7 +74,7 @@ export default function Page() {
                     }
                 })
                 setCharts({ ...charts, "UNQ_Chart": UNQ_Chart });
-            })
+            }) */ return;
 
         fetch('/api/analytics?type=CITIES')
             .then(data => data.json())
