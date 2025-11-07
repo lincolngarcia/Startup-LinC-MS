@@ -1,4 +1,4 @@
-import RootLayout from "@/src/app/layout";
+import AdminLayout from '@/src/pages/layout';
 import DynamicRender from "@/src/app/components/Backend/Helpers/dyanmicrender";
 import { useEffect, useState } from "react";
 
@@ -25,8 +25,8 @@ export default function Page() {
 }
 Page.getLayout = function getLayout(page: React.ReactNode) {
     return (
-        <RootLayout>
+        <AdminLayout>
             {page}
-        </RootLayout>
+        </AdminLayout>
     )
 }
