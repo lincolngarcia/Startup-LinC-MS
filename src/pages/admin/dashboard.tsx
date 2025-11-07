@@ -13,9 +13,7 @@ import BackendFooter from '@/src/app/components/Backend/footer';
 import BackendModal from '@/src/app/components/Backend/modal';
 import BackendPreview from '@/src/app/components/Backend/preview';
 import BackendEditor from '@/src/app/components/Backend/editor';
-
-// Delete later
-import page from "@/database/_.json"
+import PageDB from "@/src/database/PageDB"
 
 export default function Page() {
     const router = useRouter();
@@ -23,15 +21,12 @@ export default function Page() {
     const [pageSelectorModal, renderPageSelectorModal] = useState(false);
     const [deletePageModal, renderDeletePageModal] = useState(false)
     const [pagedata, setPagedata] = useState({})
-
+    
     // set the data by default
     useEffect(() => {
-        setTimeout(() => {
-            console.log(page)
-            setPagedata(page)
-        }, 4000)
+        setPagedata(PageDB["/"])
     }, [])
-
+    
     return (
         <div className="h-screen flex flex-col">
             {/* New Page Modal */}
