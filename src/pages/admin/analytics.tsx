@@ -1,6 +1,6 @@
 "use client";
 
-import RootLayout from "@/src/app/layout"
+import AdminLayout from "@/src/pages/layout"
 import NeumorphicFlat from "@/src/app/components/Backend/Neumorphic/flat"
 import NeumorphicPressed from "@/src/app/components/Backend/Neumorphic/pressed"
 import BackendMenu from "@/src/app/components/Backend/menu";
@@ -133,9 +133,9 @@ export default function Page() {
 
 Page.getLayout = function getLayout(page: React.ReactNode) {
     return (
-        <RootLayout>
+        <AdminLayout>
             {page}
-        </RootLayout>
+        </AdminLayout>
     )
 }
 
