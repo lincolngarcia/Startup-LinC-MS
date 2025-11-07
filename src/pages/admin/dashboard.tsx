@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import AdminLayout from '@/src/pages/layout';
 
 // Import Components
 import Grid from '../../app/components/Backend/Helpers/goldengrid';
@@ -7,7 +8,6 @@ import NeumorphicPressed from '../../app/components/Backend/Neumorphic/pressed';
 import BackendMenu from '../../app/components/Backend/menu';
 
 import NeumorphicFlat from '@/src/app/components/Backend/Neumorphic/flat';
-import RootLayout from '@/src/app/layout';
 import BackendHeader from '@/src/app/components/Backend/header';
 import BackendFooter from '@/src/app/components/Backend/footer';
 import BackendModal from '@/src/app/components/Backend/modal';
@@ -89,8 +89,8 @@ export default function Page() {
 
 Page.getLayout = function getLayout(page: React.ReactNode) {
     return (
-        <RootLayout>
+        <AdminLayout>
             {page}
-        </RootLayout>
+        </AdminLayout>
     )
 }

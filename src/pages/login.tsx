@@ -1,4 +1,4 @@
-import RootLayout from "@/src/app/layout"
+import AdminLayout from "@/src/pages/layout"
 import { Router, useRouter } from "next/router"
 import NeumorphicFlat from "../app/components/Backend/Neumorphic/flat";
 
@@ -23,8 +23,8 @@ export default function Page() {
 
 Page.getLayout = function getLayout(page: React.ReactNode) {
     return (
-        <RootLayout>
+        <AdminLayout>
             {page}
-        </RootLayout>
+        </AdminLayout>
     )
 }
