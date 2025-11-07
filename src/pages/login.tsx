@@ -27,6 +27,7 @@ export default function Page() {
             const data = await res.json()
             if (!res.ok) return errorHandler()
             
+            console.log("routing to dashboard")
             router.push("/admin/dashboard")
         } catch (err) {
             console.error('Login failed:', err)
@@ -50,7 +51,8 @@ export default function Page() {
 
             const data = await res.json()
             if (!res.ok) return errorHandler()
-            
+
+            console.log("routing to dashboard")
             router.push("/admin/dashboard")
         } catch (err) {
             console.error('Signup failed:', err)
