@@ -9,6 +9,8 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL('/login', request.url))
     }
 
+    console.log("cookie found")
+
     // Call our validate endpoint with the cookie
     const validateUrl = new URL('/api/auth/validate', request.url)
     const validateReq = fetch(validateUrl, {
@@ -20,13 +22,17 @@ export async function proxy(request: NextRequest) {
 
     const validateRes = await validateReq
     const result = await validateRes.json()
-
+    
+    console.log(`validated: ${result}`)
+    
     if (!validateRes.ok || !result.valid) {
       // Clear invalid cookie and redirect to login
       const response = NextResponse.redirect(new URL('/login', request.url))
       response.cookies.delete('auth')
       return response
     }
+
+    console.log("preparing to return;")
 
     // Valid token, allow request to proceed
     return NextResponse.next()
