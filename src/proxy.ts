@@ -13,6 +13,9 @@ export async function proxy(request: NextRequest) {
 
     // Call our validate endpoint with the cookie
     const validateUrl = new URL('/api/auth/validate', request.url)
+
+    console.log(`new url is ${validateUrl}`)
+
     const validateReq = fetch(validateUrl, {
       method: 'POST',
       headers: {
