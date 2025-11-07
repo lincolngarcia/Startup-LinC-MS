@@ -5,9 +5,13 @@ export default function BackendPreview({pagedata, className}: {pagedata:any, cla
     const classes = [defaultClasses, className].join(" ")
 
     useEffect(() => {
-        if (iframe.current) {
-            iframe.current.contentWindow.postMessage(pagedata, "*")
-        }
+        window.addEventListener("message", (message: any) => {
+            if (message.data === "engage connection") {
+                if (iframe.current) {
+                    iframe.current.contentWindow.postMessage(pagedata, "*")
+                }
+            }
+        })
     }, [pagedata])
 
     const iframe: any = useRef(null);

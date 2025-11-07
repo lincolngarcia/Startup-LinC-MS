@@ -7,6 +7,7 @@ export default function Page() {
         window.addEventListener('message', (event) => {
             setPageData(event.data)
         })
+        window.parent.postMessage("engage connection")
     }, [])
 
     const [pagedata, setPageData] = useState([] as any);
@@ -23,6 +24,7 @@ export default function Page() {
         return <div>Loading...</div>
     }
 }
+
 Page.getLayout = function getLayout(page: React.ReactNode) {
     return (
         <RootLayout>

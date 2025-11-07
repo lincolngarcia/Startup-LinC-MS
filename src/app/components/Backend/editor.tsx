@@ -3,7 +3,7 @@ import Library from "../library";
 import { useEffect } from "react";
 import { contentDirExcludeDefault } from "contentlayer/source-files";
 
-export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any, setPagedata: any }) {
+export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any, setPagedata: any}) {
     useEffect(() => {
         console.log("loaded editor")
     }, [])
@@ -102,9 +102,11 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
         })
     }
 
-    return (<div className="scroll">
+    return (
+    <div className="scroll">
         {dynamicRenderTypes(pagedata.children)}
-    </div>);
+    </div>
+    );
 }
 
 const InputLibrary: any = {
