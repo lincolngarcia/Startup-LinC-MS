@@ -23,7 +23,7 @@ function verifyPassword(password: string, salt: string, hash: string) {
 }
 
 async function signToken(username: string) {
-  const jwtSecret = process.env.JWT_SECRET || "ENVTESTJWTSECRET_126a6c8a854b8d50f9e7a8"
+  const jwtSecret = "ENVTESTJWTSECRET_126a6c8a854b8d50f9e7a8"
   if (!jwtSecret) {
     console.error('JWT_SECRET not set')
     throw new Error('server misconfiguration')
@@ -105,7 +105,7 @@ export default async function handler(req: any, res: any) {
 }
 
 async function verifyToken(token: string) {
-  const jwtSecret = process.env.JWT_SECRET || "ENVTESTJWTSECRET_126a6c8a854b8d50f9e7a8"
+  const jwtSecret = "ENVTESTJWTSECRET_126a6c8a854b8d50f9e7a8"
   if (!jwtSecret) {
     console.error('JWT_SECRET not set')
     throw new Error('server misconfiguration')
