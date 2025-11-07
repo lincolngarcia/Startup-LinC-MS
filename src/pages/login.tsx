@@ -14,6 +14,7 @@ export default function Page() {
                         <input placeholder  ="Username" className="softShadow text-p6 rounded-lg py-1 px-4 transition-shadow duration-500 text-black;" />
                         <input placeholder="Password" className="softShadow text-p4 rounded-lg py-1 px-4 transition-shadow duration-500 text-black;" type="password" />
                         <button className="softShadow w-full" onClick={() => router.push("/admin/dashboard")}>Login</button>
+                        <button className="softShadow w-full bg-adminGreen" onClick={() => console.log('sign up')}>Sign Up</button>
                     </div>
                 </NeumorphicFlat>
         </div>
