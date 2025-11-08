@@ -25,14 +25,8 @@ export default function Page() {
     const [newPageModal, renderNewPageModal] = useState(false);
     const [pageSelectorModal, renderPageSelectorModal] = useState(false);
     const [deletePage, renderDeletePageModal] = useState(false)
-    const [pagedata, setPagedata] = useState({})
+    const [pagedata, setPagedata] = useState(PageDB["/"])
     
-    // set the data by default
-    useEffect(() => {
-        console.log("initializing page")
-        setPagedata(PageDB["/"])
-    }, [])
-
     const context = {
         "PageDB": PageDB,
         "pagedata": pagedata,
