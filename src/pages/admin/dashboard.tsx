@@ -45,8 +45,8 @@ export default function Page() {
                     <BackendMenu className="col-start-1 col-end-3" active="Home" />
                     <BackendPreview className="col-start-3 col-end-9 border" pagedata={pagedata} />
                     <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
-                        <h3>Editor</h3>
-                        <BackendEditor pagedata={pagedata} setPagedata={setPagedata}/>
+                        <h3 className="text-xl bold mb-4">{pagedata.title}</h3>
+                        <BackendEditor context={context}/>
                         <div className="flex justify-between mt-2">
                             <NeumorphicFlat><button onClick={() => renderPageSelectorModal(true)}>Select Page</button></NeumorphicFlat>
                             <NeumorphicFlat><button onClick={() => renderDeletePageModal(true)}>Delete Page</button></NeumorphicFlat>

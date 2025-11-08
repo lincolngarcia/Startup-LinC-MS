@@ -3,13 +3,15 @@ import Library from "../library";
 import { useEffect } from "react";
 import { contentDirExcludeDefault } from "contentlayer/source-files";
 
-export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any, setPagedata: any}) {
-    useEffect(() => {
-        console.log("loaded editor")
-    }, [])
+export default function BackendEditor({ context }: { context: any }) {
+    const pagedata = context.pagedata
+
+    function updatePage(newData: any) {
+        context.setPagedata(newData);
+        context.PageDB[newData.url] = newData
+    }
 
     if (!pagedata.children) {
-        console.log("rerendering", pagedata)
         return <p>Select a page.</p>
     }
 
@@ -41,7 +43,7 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
             node.content = value
         }
 
-        setPagedata(newPagedata);
+        updatePage(newPagedata);
     }
 
     function dynamicRenderTypes(parent: any, path: number[] = []): React.ReactNode {

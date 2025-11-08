@@ -5,7 +5,7 @@ export default function BackendDeletePageModal({render, renderModal, context}: {
     function deletePage() {
         console.log("deleting page")
 
-        if (context.pagedata.title == "Homepage") return console.log("you can't delete the home page!");
+        if (context.pagedata.title == "Homepage") return renderModal(false)
         
         context.setPagedata(context.PageDB["/"])
 
