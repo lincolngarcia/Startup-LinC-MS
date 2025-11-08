@@ -16,10 +16,7 @@ export async function proxy(request: NextRequest) {
     const match = request.url.match(regex);
     const baseUrl = match ? match[1] : null;
 
-    const validateUrl = baseUrl + '/api/auth/validate'
-    console.log(request.url)
-
-    console.log(`new url is ${validateUrl}`)
+    const validateUrl = 'https://startup.lincolngarcia.click/api/auth/validate'
 
     const validateReq = fetch(validateUrl, {
       method: 'POST',
