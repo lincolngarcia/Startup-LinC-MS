@@ -1,6 +1,6 @@
 const PageDB:any = {
     "/": {
-        "name": "Homepage",
+        "title": "Homepage",
         "children": [
             {
                 "componentTag": "div",
