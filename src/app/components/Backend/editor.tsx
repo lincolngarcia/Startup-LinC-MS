@@ -72,7 +72,7 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
                 }))
             }
 
-            if (component.content) {
+            if (Object.keys(component).includes("content")) {
                 return (
                     <div className="pb-1" key={`content-${currentPath.join("-")}`}>
                         <label className="p-1">Text</label>
