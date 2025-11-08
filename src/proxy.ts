@@ -12,7 +12,12 @@ export async function proxy(request: NextRequest) {
     console.log("cookie found")
 
     // Call our validate endpoint with the cookie
-    const validateUrl = new URL('/api/auth/validate', request.url)
+    const regex = /^(https?:\/\/[^/]+)/;
+    const match = request.url.match(regex);
+    const baseUrl = match ? match[1] : null;
+
+    const validateUrl = baseUrl + '/api/auth/validate'
+    console.log(request.url)
 
     console.log(`new url is ${validateUrl}`)
 
