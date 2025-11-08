@@ -3,13 +3,15 @@ import Library from "../library";
 import { useEffect } from "react";
 import { contentDirExcludeDefault } from "contentlayer/source-files";
 
-export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any, setPagedata: any }) {
-    useEffect(() => {
-        console.log("loaded editor")
-    }, [])
+export default function BackendEditor({ context }: { context: any }) {
+    const pagedata = context.pagedata
+
+    function updatePage(newData: any) {
+        context.setPagedata(newData);
+        context.PageDB[newData.url] = newData
+    }
 
     if (!pagedata.children) {
-        console.log("rerendering", pagedata)
         return <p>Select a page.</p>
     }
 
@@ -41,13 +43,11 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
             node.content = value
         }
 
-        setPagedata(newPagedata);
+        updatePage(newPagedata);
     }
 
     function dynamicRenderTypes(parent: any, path: number[] = []): React.ReactNode {
         return parent.flatMap((component: any, index: number) => {
-
-            console.log(component, index)
 
             const currentPath = [...path, index];
             const inputs: any = []
@@ -72,7 +72,7 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
                 }))
             }
 
-            if (component.content) {
+            if (Object.keys(component).includes("content")) {
                 return (
                     <div className="pb-1" key={`content-${currentPath.join("-")}`}>
                         <label className="p-1">Text</label>
@@ -102,9 +102,11 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
         })
     }
 
-    return (<div className="scroll">
+    return (
+    <div className="scroll">
         {dynamicRenderTypes(pagedata.children)}
-    </div>);
+    </div>
+    );
 }
 
 const InputLibrary: any = {

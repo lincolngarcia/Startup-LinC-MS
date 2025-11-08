@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-
 export default function BackendModal({children, render, renderModal}: {children: React.ReactNode, render:boolean, renderModal: any}) {
     if (render) {
         return (
