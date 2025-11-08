@@ -47,8 +47,6 @@ export default function BackendEditor({ pagedata, setPagedata }: { pagedata: any
     function dynamicRenderTypes(parent: any, path: number[] = []): React.ReactNode {
         return parent.flatMap((component: any, index: number) => {
 
-            console.log(component, index)
-
             const currentPath = [...path, index];
             const inputs: any = []
             
