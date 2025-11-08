@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 export default function Page() {
     useEffect(() => {
         window.addEventListener('message', (event) => {
-            console.log("page data recieved", event)
             setPageData(event.data)
         })
-        console.log("sending engagement message")
+        console.log("Preview Child: Requesting Engagment")
         window.parent.postMessage("engage connection")
     }, [])
 
@@ -23,7 +22,6 @@ export default function Page() {
             </div>
         )
     } else {
-        console.log("pagedata", pagedata)
         return <div>Loading...</div>
     }
 }
