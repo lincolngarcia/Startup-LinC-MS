@@ -1,8 +1,7 @@
-import AdminLayout from '@/src/pages/layout';
-import DynamicRender from "@/src/app/components/Backend/Helpers/dyanmicrender";
+import DynamicRender from "../components/renderers/dyanmicrender"
 import { useEffect, useState } from "react";
 
-export default function Page() {
+export default function Preview() {
     useEffect(() => {
         window.addEventListener('message', (event) => {
             setPageData(event.data)
@@ -24,12 +23,4 @@ export default function Page() {
     } else {
         return <div>Loading...</div>
     }
-}
-
-Page.getLayout = function getLayout(page: React.ReactNode) {
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
 }

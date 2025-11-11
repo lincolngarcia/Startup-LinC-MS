@@ -1,4 +1,4 @@
-import BackendModal from "@/src/app/components/Backend/modal";
+import BackendModal from "../../components/admin/Helpers/modal"
 import { useState } from "react";
 
 export default function BackendNewPageModal({render, renderModal, context}: {render:any, renderModal: any, context: any}) {

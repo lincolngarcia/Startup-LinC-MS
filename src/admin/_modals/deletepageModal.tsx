@@ -1,4 +1,4 @@
-import BackendModal from "@/src/app/components/Backend/modal";
+import BackendModal from "../../components/admin/Helpers/modal"
 
 export default function BackendDeletePageModal({render, renderModal, context}: {render:any, renderModal: any, context: any}) {
 

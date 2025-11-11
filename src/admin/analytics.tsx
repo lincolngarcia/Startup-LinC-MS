@@ -1,12 +1,7 @@
-"use client";
-
-import AdminLayout from "@/src/pages/layout"
-import NeumorphicFlat from "@/src/app/components/Backend/Neumorphic/flat"
-import NeumorphicPressed from "@/src/app/components/Backend/Neumorphic/pressed"
-import BackendMenu from "@/src/app/components/Backend/menu";
-import Grid from "@/src/app/components/Backend/Helpers/goldengrid"
-import BackendHeader from "@/src/app/components/Backend/header";
-import BackendFooter from "@/src/app/components/Backend/footer";
+import NeumorphicFlat from "../components/library/Backend/Neumorphic/flat"
+import NeumorphicPressed from "../components/library/Backend/Neumorphic/pressed"
+import BackendMenu from "../components/admin/menu"
+import Grid from "../components/admin/Helpers/goldengrid"
 import { Suspense, useEffect, useState } from "react";
 
 import { Chart, LinearScale, CategoryScale, BarController, BarElement, LineController, LineElement, PointElement, Title, Tooltip, Legend, DoughnutController } from 'chart.js';
@@ -31,7 +26,7 @@ Chart.register(
 Chart.defaults.color = "#1432FF"
 
 
-export default function Page() {
+export default function Analytics() {
     const [analyticsData, setAnalyticsData]: any = useState({});
     const [charts, setCharts]: any = useState({});
 
@@ -109,7 +104,6 @@ export default function Page() {
 
     return (
         <div className="bg-adminGray h-screen flex flex-col">
-            <BackendHeader title="Analytics Dashboard" />
             <main className="grow h-full">
                 <Grid className="h-full">
                     <BackendMenu className="col-start-1 col-end-3" active="Analytics" />
@@ -126,22 +120,9 @@ export default function Page() {
                     </NeumorphicFlat>
                 </Grid>
             </main>
-            <BackendFooter />
         </div>
     );
 };
-
-Page.getLayout = function getLayout(page: React.ReactNode) {
-    return (
-        <AdminLayout>
-            {page}
-        </AdminLayout>
-    )
-}
-
-function analyticsParser() {
-    return null;
-}
 
 function dateParse(data: any) {
     const str = `${data}`;
