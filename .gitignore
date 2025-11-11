@@ -35,10 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# amplify
-.amplify
-amplify_outputs*
-amplifyconfiguration*
-
-# contentLayer
-.contentlayer
+# node
+node_modules
+dist

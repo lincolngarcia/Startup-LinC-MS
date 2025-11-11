@@ -1,0 +1,22 @@
+{
+  "name": "simon-service",
+  "version": "1.0.0",
+  "description": "This demonstrates a service for a web application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@google-analytics/data": "^5.2.1",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0"
+  }
+}

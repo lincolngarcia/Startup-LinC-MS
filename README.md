@@ -126,12 +126,12 @@ For this deliverable, be sure to visit the /admin/dashboard route. This is where
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Installed Express with NPM. Default port on 3000.js`.
+- [x] **Static middleware for frontend** - - Simple endpoints in service/index
+- [x] **Calls to third party endpoints** - /admin/analytics page calls /api/analytics, which queries https://analyticsdata.googleapis.com, renders the resulting JSON with React and Chart.js.
+- [x] **Backend service endpoints** - Simple endpoints for database updates and auth
+- [x] **Frontend calls service endpoints** - All mocked functionality removed from the frontend and replaced with calls to the service.
+- [x] **Supports registration, login, logout, and restricted endpoint** -  Fully support authentication and restrict access to database edits and admin-related information (analytics and page CRUD endpoings)
 
 
 ## 🚀 DB deliverable
