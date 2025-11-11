@@ -1,4 +1,4 @@
-const PageDB:any = {
+const PageDB = {
     "/": {
         "title": "Homepage",
         "path": "/",
