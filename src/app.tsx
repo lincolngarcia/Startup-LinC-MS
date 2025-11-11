@@ -5,13 +5,12 @@ import Login from "./login"
 import { useState } from "react";
 
 export default function App() {
-  const [auth, setAuth] = useState(false)
 
   return (
     <BrowserRouter>
         <Routes>
             <Route path="login" element={<Login />} />
-            <Route path="/admin/*" element={<Admin authentication={[auth, setAuth]} />} />
+            <Route path="/admin/*" element={<Admin />} />
             <Route path="*" element={<Slug />} />
         </Routes>
     </BrowserRouter>

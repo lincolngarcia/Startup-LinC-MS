@@ -1,12 +1,15 @@
+require('dotenv').config();
 const PageDB = require("./database/pages.ts")
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
-const app = express();
 const path = require("path")
+const app = express();
+const { BetaAnalyticsDataClient } = require("@google-analytics/data")
 
 const authCookieName = 'lincms_token';
+const propertyId = '511603332';
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = [];
@@ -29,8 +32,8 @@ app.use(`/api`, apiRouter);
 
 // Middleware to verify that the user is authorized to call an endpoint
 async function verifyAuth(req, res, next) {
+  console.log(`querying from ${req.path}`)
   const user = await findUser('lincms_token', req.cookies[authCookieName]);
-  console.log("user exists")
   if (user) {
     next();
   } else {
@@ -45,7 +48,7 @@ apiRouter.post('/create', async (req, res) => {
   } else {
     const user = await createUser(req.body.email, req.body.password);
 
-    setAuthCookie(res, user.token);
+    setAuthCookie(res, user.lincms_token);
     res.send({ email: user.email });
   }
 });
@@ -55,8 +58,8 @@ apiRouter.post('/login', async (req, res) => {
   const user = await findUser('email', req.body.email);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
-      user.token = uuid.v4();
-      setAuthCookie(res, user.token);
+      user.lincms_token = uuid.v4();
+      setAuthCookie(res, user.lincms_token);
       res.send({ email: user.email });
       return;
     }
@@ -68,7 +71,7 @@ apiRouter.post('/login', async (req, res) => {
 apiRouter.delete('/logout', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    delete user.token;
+    delete user.lincms_token;
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -93,9 +96,10 @@ apiRouter.get("/analytics", verifyAuth, async (req, res) => {
 
   async function runUNQReport() {
     const credentials = {
-      "private_key": secret("ga4_private_key"),
-      "client_email": secret("ga4_client_email")
+      "private_key": process.env.GA4_PRIVATE_KEY,
+      "client_email": process.env.GA4_CLIENT_EMAIL
     }
+    console.log(credentials)
 
     const analyticsDataClient = new BetaAnalyticsDataClient({
       credentials,
@@ -132,8 +136,8 @@ apiRouter.get("/analytics", verifyAuth, async (req, res) => {
 
   async function runCitiesReport() {
     const credentials = {
-      "private_key": secret("ga4_private_key"),
-      "client_email": secret("ga4_client_email")
+      "private_key": process.env.GA4_PRIVATE_KEY,
+      "client_email": process.env.GA4_CLIENT_EMAIL
     }
 
     const analyticsDataClient = new BetaAnalyticsDataClient({
@@ -187,11 +191,14 @@ apiRouter.post("/pages", (req, res) => {
   res.status(200).end()
 })
 
+app.get('/admin/preview', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+})
+
 // Install the middleware
 app.get('/admin/*', verifyAuth, (_req, res) => {
-  res.json({ "private": "information" })
+ res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
-
 
 // Serve the default path
 app.get('*', (req, res) => {
@@ -210,7 +217,7 @@ async function createUser(email, password) {
   const user = {
     email: email,
     password: passwordHash,
-    token: uuid.v4(),
+    lincms_token: uuid.v4(),
   };
   users.push(user);
 
@@ -219,7 +226,6 @@ async function createUser(email, password) {
 
 async function findUser(field, value) {
   if (!value) return null;
-
   return users.find((u) => u[field] === value);
 }
 
@@ -227,9 +233,9 @@ async function findUser(field, value) {
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
-    secure: true,
+    secure: false, //process.env.NODE_ENV === 'production',
     httpOnly: true,
-    sameSite: 'strict',
+    sameSite: "lax", //process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
   });
 }
 

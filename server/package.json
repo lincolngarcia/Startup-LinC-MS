@@ -9,8 +9,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@google-analytics/data": "^5.2.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "uuid": "^11.0.5"
   },

@@ -8,7 +8,7 @@ import BackendFooter from "../components/admin/footer"
 import BackendMenu from "../components/admin/menu"
 import Grid from "../components/admin/Helpers/goldengrid"
 
-export default function Admin({ authentication }: { authentication: any }) {
+export default function Admin() {
     const location = useLocation()
 
     const locationSelector: any = {

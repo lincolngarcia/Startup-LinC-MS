@@ -103,24 +103,17 @@ export default function Analytics() {
 
 
     return (
-        <div className="bg-adminGray h-screen flex flex-col">
-            <main className="grow h-full">
-                <Grid className="h-full">
-                    <BackendMenu className="col-start-1 col-end-3" active="Analytics" />
-                    <NeumorphicFlat className="px-4 mx-4 col-start-4 col-end-11 overflow-scroll">
-                        <Suspense fallback={<div>loading data...</div>}>
-                            <div className="h-0 scroll" >
-                                <h4 className="text-2xl">Unique Visitors in the past week</h4>
-                                <canvas height="725" width="725" className="p-8 w-auto" id="UQV_week" />
-                                <br />
-                                <h4 className="text-2xl">Most popular cities</h4>
-                                <canvas height="725" width="725" className="p-8 w-auto" id="cities_overall" />
-                            </div>
-                        </Suspense>
-                    </NeumorphicFlat>
-                </Grid>
-            </main>
-        </div>
+        <NeumorphicFlat className="px-4 mx-4 col-start-4 col-end-11 overflow-scroll">
+            <Suspense fallback={<div>loading data...</div>}>
+                <div className="h-0 scroll" >
+                    <h4 className="text-2xl">Unique Visitors in the past week</h4>
+                    <canvas height="725" width="725" className="p-8 w-auto" id="UQV_week" />
+                    <br />
+                    <h4 className="text-2xl">Most popular cities</h4>
+                    <canvas height="725" width="725" className="p-8 w-auto" id="cities_overall" />
+                </div>
+            </Suspense>
+        </NeumorphicFlat>
     );
 };
 
