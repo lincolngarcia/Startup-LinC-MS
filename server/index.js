@@ -1,5 +1,4 @@
-require('dotenv').config();
-const PageDB = require("./database/pages.ts")
+require('dotenv').config({ path: `${__dirname}/.env` });
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
@@ -7,14 +6,39 @@ const uuid = require('uuid');
 const path = require("path")
 const app = express();
 const { BetaAnalyticsDataClient } = require("@google-analytics/data")
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const authCookieName = 'lincms_token';
 const propertyId = '511603332';
 
+async function DB_command(fn) {
+  // Init Mongo DB
+  const mongodbURI = `mongodb+srv://lincolngarciadevelopment_db_user:${process.env.MONGO_DB_PASS}@cluster0.lrunut2.mongodb.net/?appName=Cluster0`;
+  const client = new MongoClient(mongodbURI, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true
+    }
+  })
+
+  let result;
+  try {
+    const connection = await client.connect()
+    result = await fn(connection)
+  } catch (err) {
+    console.log(err)
+    result = { "status": "failure" }
+  } finally {
+    await client.close()
+    return result
+  }
+}
+
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = [];
 
-// The service port. In production the front-end code is statically hosted by the service on the same port.
+// The service port. In production the front-end code is statically hosted by the service on ort.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // JSON body parsing using built-in middleware
@@ -24,7 +48,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Serve up the front-end static content hosting
-app.use(express.static('../dist'));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Router for service endpoints
 var apiRouter = express.Router();
@@ -32,7 +56,6 @@ app.use(`/api`, apiRouter);
 
 // Middleware to verify that the user is authorized to call an endpoint
 async function verifyAuth(req, res, next) {
-  console.log(`querying from ${req.path}`)
   const user = await findUser('lincms_token', req.cookies[authCookieName]);
   if (user) {
     next();
@@ -175,19 +198,39 @@ apiRouter.get("/analytics", verifyAuth, async (req, res) => {
 })
 
 // Install the DB
-apiRouter.get("/pages", (req, res) => {
-  if (!req.query || !req.query.location) return res.json({"error": "no location query"});
-  if (req.query.location == "_lincms_all") res.json(PageDB)
-  else if (PageDB[req.query.location]) return res.json(PageDB[req.query.location])
-  else return json({"error": "page not found"})
+apiRouter.get("/pages", async (req, res) => {
+  if (!req.query || !req.query.location) return res.json({ "error": "no location query" });
+  let result;
+  if (req.query.location == "_lincms_all") {
+    result = await DB_command(async (client) => {
+      const allPages = await client.db("startup").collection("pages").find().project({ path: 1, title: 1 }).toArray()
+      return allPages
+    })
+  } else {
+    result = await DB_command(async (client) => {
+      const page = await client.db("startup").collection("pages").findOne({ "path": req.query.location })
+      return page
+    })
+  }
+  console.log(result)
+  if (result !== null) return res.json(result);
+  else return res.json({ "error": "page not found" })
 })
 
-apiRouter.post("/pages", (req, res) => {
+apiRouter.post("/pages", async (req, res) => {
   if (!req.body) res.status(401).end()
   const page = req.body.title
   if (!page) res.status(401).end()
 
-  PageDB[req.body.path] = req.body
+  const result = await DB_command(async (client) => {
+    const newPage = {...req.body}
+    delete newPage._id
+    return await client.db("startup").collection("pages").replaceOne({ path: newPage.path }, newPage, { upsert: true })
+  })
+
+  console.log(result)
+  if (!result.modifiedCount) res.status(404).end()
+
   res.status(200).end()
 })
 
@@ -196,8 +239,8 @@ app.get('/admin/preview', (_req, res) => {
 })
 
 // Install the middleware
-app.get('/admin/*', verifyAuth, (_req, res) => {
- res.sendFile(path.join(__dirname, '../dist/index.html'));
+app.get('/admin*', verifyAuth, (_req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 // Serve the default path
