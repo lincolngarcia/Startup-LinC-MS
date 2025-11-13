@@ -80,6 +80,9 @@ apiRouter.post('/login', async (req, res) => {
     if (await bcrypt.compare(req.body.password, user.password)) {
       user.lincms_token = uuid.v4();
       setAuthCookie(res, user.lincms_token);
+      DB_command(async (client) => {
+        await client.db("startup").collection("users").replaceOne({email : user.email}, user, {upsert: true})
+      })
       res.send({ email: user.email });
       return;
     }
@@ -119,7 +122,6 @@ apiRouter.get("/analytics", verifyAuth, async (req, res) => {
       "private_key": process.env.GA4_PRIVATE_KEY,
       "client_email": process.env.GA4_CLIENT_EMAIL
     }
-    console.log(credentials)
 
     const analyticsDataClient = new BetaAnalyticsDataClient({
       credentials,
@@ -209,7 +211,6 @@ apiRouter.get("/pages", async (req, res) => {
       return page
     })
   }
-  console.log(result)
   if (result !== null) return res.json(result);
   else return res.json({ "error": "page not found" })
 })
@@ -225,12 +226,12 @@ apiRouter.post("/pages", async (req, res) => {
     return await client.db("startup").collection("pages").replaceOne({ path: newPage.path }, newPage, { upsert: true })
   })
 
-  console.log(result)
   if (!result.modifiedCount) res.status(404).end()
 
   res.status(200).end()
 })
 
+// Set /admin/preview as a free page
 app.get('/admin/preview', (_req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 })
@@ -239,6 +240,12 @@ app.get('/admin/preview', (_req, res) => {
 app.get('/admin*', verifyAuth, (_req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
+
+app.get("/login", async (req, res, next) => {
+  const user = await findUser('lincms_token', req.cookies[authCookieName]);
+  if (user) res.redirect("/admin/dashboard")
+  else next();
+})
 
 // Serve the default path
 app.get('*', (req, res) => {

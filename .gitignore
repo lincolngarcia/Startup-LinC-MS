@@ -38,3 +38,6 @@ next-env.d.ts
 # node
 node_modules
 dist
+
+# server
+/server/node_modules
