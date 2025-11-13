@@ -2,7 +2,11 @@ import { useState } from "react";
 import dynamicRenderTypes from "../renderers/dynamicrenderTypes";
 
 export default function BackendEditor({ context }: { context: any }) {
+    console.log(context.activeSection)
+
     const pagedata = context.pagedata
+    const activeSection = context.activeSection.split("-")[1]
+    const subChildren = pagedata.children[activeSection].children || []
 
     function createInputUpdateHandler() {
         let activeRequest:any = false;   // Promise of the active fetch
@@ -63,7 +67,7 @@ export default function BackendEditor({ context }: { context: any }) {
 
     return (
         <div className="scroll">
-            {dynamicRenderTypes(pagedata.children, [], handleInputChange)}
+            {dynamicRenderTypes(subChildren, [], handleInputChange)}
         </div>
     );
 

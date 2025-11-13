@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export default function BackendPreview({pagedata, className="" }: {pagedata:any, className?:string}) {
+export default function BackendPreview({context, className="" }: {context:any, className?:string}) {
     const defaultClasses = "h-full w-full"
     const classes = [defaultClasses, className].join(" ")
 
@@ -9,17 +9,20 @@ export default function BackendPreview({pagedata, className="" }: {pagedata:any,
             if (message.data === "engage connection") {
                 console.log("Preview Parent: Engagement Request Acknowledged")
                 if (iframe.current) {
-                    console.log("Preview Parent: Sending Initial Page Data:", pagedata)
-                    iframe.current.contentWindow.postMessage(pagedata, "*")
+                    console.log("Preview Parent: Sending Initial Page Data:", context.pagedata)
+                    iframe.current.contentWindow.postMessage(context.pagedata, "*")
                 }
+            }else{
+                context.setActiveSection(message.data)
+                console.log(`Clicked ${message.data}`)
             }
         })
     }, [])
 
     // Update Page
     useEffect(() => {
-        iframe.current.contentWindow.postMessage(pagedata, "*")
-    }, [pagedata])
+        iframe.current.contentWindow.postMessage(context.pagedata, "*")
+    }, [context.pagedata])
 
     const iframe: any = useRef(null);
 
