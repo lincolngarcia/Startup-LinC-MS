@@ -35,9 +35,6 @@ async function DB_command(fn) {
   }
 }
 
-// The scores and users are saved in memory and disappear whenever the service is restarted.
-let users = [];
-
 // The service port. In production the front-end code is statically hosted by the service on ort.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
@@ -262,14 +259,20 @@ async function createUser(email, password) {
     password: passwordHash,
     lincms_token: uuid.v4(),
   };
-  users.push(user);
+  
+  await DB_command(async (client) => {
+    await client.db("startup").collection("users").insertOne(user)
+  })
 
   return user;
 }
 
 async function findUser(field, value) {
   if (!value) return null;
-  return users.find((u) => u[field] === value);
+  const result = await DB_command(async (client) => {
+    return await client.db("startup").collection("users").findOne({[field]: value})
+  })
+  return result
 }
 
 // setAuthCookie in the HTTP response
