@@ -4,16 +4,58 @@ import dynamicRenderTypes from "../renderers/dynamicrenderTypes";
 export default function BackendEditor({ context }: { context: any }) {
     const pagedata = context.pagedata
 
-    function updatePage(newData: any) {
-        context.setPagedata(newData);
-        fetch("/api/pages", {
-            method: "post",
-            body: JSON.stringify(newData),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
+    function createInputUpdateHandler() {
+        let activeRequest:any = false;   // Promise of the active fetch
+        let nextData: any = null;        // Holds data for the next queued request
+        let nextScheduled = false;  // Whether a next request is scheduled
+
+        async function sendRequest(data: any) {
+            try { 
+                activeRequest = fetch("/api/pages", {
+                    method: "post",
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+
+                await activeRequest;
+            } catch (err) {
+                console.error("Fetch failed:", err);
+            } finally {
+                activeRequest = null;
+
+                // If there’s a next request scheduled, trigger it
+                if (nextScheduled) {
+                    const dataToSend = nextData;
+                    nextData = null;
+                    nextScheduled = false;
+                    sendRequest(dataToSend);
+                }
+            }
+        }
+
+        return function onInputChange(data: any) {
+            context.setPagedata(data)
+            // Case 1: No active request → send immediately
+            if (!activeRequest) {
+                sendRequest(data);
+                return;
+            }
+
+            // Case 2: Active request but no next scheduled → queue one
+            if (!nextScheduled) {
+                nextData = data;
+                nextScheduled = true;
+                return;
+            }
+
+            // Case 3: Active request and next scheduled → update the next data
+            nextData = data;
+        };
     }
+
+    const [updatePage, setUpdatePage] = useState(() => createInputUpdateHandler())
 
     if (!pagedata || pagedata.children.length === 0) {
         return <p>Select a page.</p>
