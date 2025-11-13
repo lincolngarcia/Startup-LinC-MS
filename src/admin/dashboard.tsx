@@ -24,19 +24,20 @@ export default function Dashboard() {
     useEffect(() => {
         fetch("/api/pages?location=_lincms_all")
             .then(data => data.json())
-            .then(data => {
-                setAllPages(data);
-                setPagedata(data["/"])
-            })
+            .then(data => setAllPages(data))
+
+        fetch("/api/pages?location=/")
+            .then(data => data.json())
+            .then(data => setPagedata(data))
     }, [])
 
-    
+
     const context = {
         "PageDB": allPages,
         "pagedata": pagedata,
         "setPagedata": setPagedata
     }
-    
+
     return (
         <>
             <BackendNewPageModal render={newPageModal} renderModal={renderNewPageModal} context={context} />
@@ -44,7 +45,7 @@ export default function Dashboard() {
             <BackendPageSelectionModal render={pageSelectorModal} renderModal={renderPageSelectorModal} context={context} />
             <NeumorphicFlat className="lg:col-start-3 lg:col-end-9">
                 <Suspense fallback={<div>loading...</div>}>
-                    {pagedata ? <BackendPreview pagedata={pagedata} /> : <></> }
+                    {pagedata ? <BackendPreview pagedata={pagedata} /> : <></>}
                 </Suspense>
             </NeumorphicFlat>
             <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
