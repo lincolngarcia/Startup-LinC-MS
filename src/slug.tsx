@@ -4,7 +4,7 @@ import DynamicRender from "./components/renderers/dyanmicrender";
 export default function Slug() {
   const slug = window.location.pathname.split("/");
   const path: string = slug.join("/")
-  let [page, setPage]: any = useState()
+  let [page, setPage]: any = useState("loading")
 
   useEffect(() => {
     fetch(`/api/pages?location=${path}`)
@@ -12,8 +12,9 @@ export default function Slug() {
       .then(data => setPage(data))
   }, [])
 
-  console.log(!page)
-  if (!page) return NotFound();
+  console.log(page)
+  if (page == "loading") return Loading();
+  if (page.error) return NotFound();
 
   return (
     <div className="min-w-screen">
@@ -25,5 +26,9 @@ export default function Slug() {
 }
 
 function NotFound(): any {
-  return (<main className='container-fluid bg-secondary text-center'>This page cannot be found. Sorry.</main>);
+  return (<main className='text-center'>This page cannot be found. Sorry.</main>);
+}
+
+function Loading(): any {
+  return (<main className="text-center">Loading...</main>);
 }
