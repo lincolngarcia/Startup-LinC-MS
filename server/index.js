@@ -14,7 +14,7 @@ const propertyId = '511603332';
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = [];
 
-// The service port. In production the front-end code is statically hosted by the service on the same port.
+// The service port. In production the front-end code is statically hosted by the service on ort.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // JSON body parsing using built-in middleware
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Serve up the front-end static content hosting
-app.use(express.static('../dist'));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Router for service endpoints
 var apiRouter = express.Router();
@@ -196,7 +196,7 @@ app.get('/admin/preview', (_req, res) => {
 })
 
 // Install the middleware
-app.get('/admin/*', verifyAuth, (_req, res) => {
+app.get('/admin', verifyAuth, (_req, res) => {
  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
