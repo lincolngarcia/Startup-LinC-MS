@@ -32,7 +32,9 @@ export default function Analytics() {
 
     useEffect(() => {
         // Fetch analytics data from the API
-        fetch('/api/analytics?type=UNQ')
+        fetch('/api/analytics?type=UNQ', {
+            credentials: "same-origin"
+        })
             .then(data => data.json())
             .then((uncleanData: any) => {
                 let labels: any = getLast7Dates();
@@ -71,7 +73,9 @@ export default function Analytics() {
                 setCharts({ ...charts, "UNQ_Chart": UNQ_Chart });
             })
 
-        fetch('/api/analytics?type=CITIES')
+        fetch('/api/analytics?type=CITIES', {
+            credentials: "same-origin"
+        })
             .then(data => data.json())
             .then((uncleanData: any) => {
                 let labels: any = []
