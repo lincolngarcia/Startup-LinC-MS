@@ -2,11 +2,7 @@ import { useState } from "react";
 import dynamicRenderTypes from "../renderers/dynamicrenderTypes";
 
 export default function BackendEditor({ context }: { context: any }) {
-    console.log(context.activeSection)
-
-    const pagedata = context.pagedata
-    const activeSection = context.activeSection.split("-")[1]
-    const subChildren = pagedata.children[activeSection].children || []
+    const subChildren = context.pagedata.children[context.activeSection].children || []
 
     function createInputUpdateHandler() {
         let activeRequest:any = false;   // Promise of the active fetch
@@ -61,17 +57,18 @@ export default function BackendEditor({ context }: { context: any }) {
 
     const [updatePage, setUpdatePage] = useState(() => createInputUpdateHandler())
 
-    if (!pagedata || pagedata.children.length === 0) {
+    if (!context.pagedata || context.pagedata.children.length === 0) {
         return <p>Select a page.</p>
     }
 
     return (
-        <div className="scroll">
-            {dynamicRenderTypes(subChildren, [], handleInputChange)}
+        <div className="scroll grow">
+            {dynamicRenderTypes(subChildren, [context.activeSection], handleInputChange)}
         </div>
     );
 
     function handleInputChange(event: any) {
+        // All good here
         const target = event.target as HTMLInputElement | HTMLTextAreaElement;
         const pathStr = target.dataset.path;
         const prop = target.dataset.prop;
@@ -80,9 +77,11 @@ export default function BackendEditor({ context }: { context: any }) {
 
         const value = (target.type === "checkbox") ? String((target as HTMLInputElement).checked) : target.value;
 
-        const newPagedata = { ...pagedata };
+        const newPagedata = { ...context.pagedata };
 
         const path: number[] = JSON.parse(pathStr);
+        
+        console.log(value, path)
 
         let node: any = newPagedata;
         for (const idx of path) {
@@ -99,6 +98,10 @@ export default function BackendEditor({ context }: { context: any }) {
         } else if (node.content || node.content === "") {
             node.content = value
         }
+
+        console.log(newPagedata)
+
+        // No good here
 
         updatePage(newPagedata);
     }

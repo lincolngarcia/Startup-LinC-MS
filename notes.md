@@ -37,3 +37,11 @@ While React likes to use Router(), NextJS prefers the <Link> convention.
 
 useEffect is cool, however I still prefer to use VueJS's emit and dynamic prop properties
 
+## Service
+
+It The API as pretty simple to work with, although I now know not to submit private API keys to a public github
+
+## Database
+
+It was pretty easy to set up, but If I could go back I would not make it cloud based for performance
+

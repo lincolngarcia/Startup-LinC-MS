@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export default function BackendPreview({context, className="" }: {context:any, className?:string}) {
+export default function BackendPreview({ context, className = "" }: { context: any, className?: string }) {
     const defaultClasses = "h-full w-full"
     const classes = [defaultClasses, className].join(" ")
 
@@ -12,7 +12,7 @@ export default function BackendPreview({context, className="" }: {context:any, c
                     console.log("Preview Parent: Sending Initial Page Data:", context.pagedata)
                     iframe.current.contentWindow.postMessage(context.pagedata, "*")
                 }
-            }else{
+            } else {
                 context.setActiveSection(message.data)
                 console.log(`Clicked ${message.data}`)
             }
@@ -26,5 +26,7 @@ export default function BackendPreview({context, className="" }: {context:any, c
 
     const iframe: any = useRef(null);
 
-    return <iframe ref={iframe} src="/admin/preview" className={classes}/>
+    return (<div className="transform-[scale(0.9)] origin-top-left w-[111.11%] h-[111.11%]">
+        <iframe ref={iframe} src="/admin/preview" className={classes} />
+    </div>)
 }
