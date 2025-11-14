@@ -62,12 +62,13 @@ export default function BackendEditor({ context }: { context: any }) {
     }
 
     return (
-        <div className="scroll">
-            {dynamicRenderTypes(subChildren, [], handleInputChange)}
+        <div className="scroll grow">
+            {dynamicRenderTypes(subChildren, [context.activeSection], handleInputChange)}
         </div>
     );
 
     function handleInputChange(event: any) {
+        // All good here
         const target = event.target as HTMLInputElement | HTMLTextAreaElement;
         const pathStr = target.dataset.path;
         const prop = target.dataset.prop;
@@ -79,6 +80,8 @@ export default function BackendEditor({ context }: { context: any }) {
         const newPagedata = { ...context.pagedata };
 
         const path: number[] = JSON.parse(pathStr);
+        
+        console.log(value, path)
 
         let node: any = newPagedata;
         for (const idx of path) {
@@ -95,6 +98,10 @@ export default function BackendEditor({ context }: { context: any }) {
         } else if (node.content || node.content === "") {
             node.content = value
         }
+
+        console.log(newPagedata)
+
+        // No good here
 
         updatePage(newPagedata);
     }

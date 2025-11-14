@@ -34,6 +34,7 @@ export default function Preview() {
     }
 
     const [pagedata, setPageData] = useState([] as any);
+    
     if (pagedata.children) {
         return (
             <div className="min-w-screen">
