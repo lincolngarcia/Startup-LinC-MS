@@ -8,7 +8,7 @@ function Standard_FeatureStacked({children}: {children: React.ReactNode}) {
 
 const bindings = {
     children: true,
-    props: {}
+    props: {},
 }
 
-export default [Standard_FeatureStacked, bindings]
+export default [Standard_FeatureStacked, bindings, "Feature Stacked"]

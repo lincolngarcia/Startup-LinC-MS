@@ -1,4 +1,3 @@
-import { AnyARecord } from "node:dns";
 import StandardAction from "../../Standard/Helper/Action";
 import { Children } from "react";
 
@@ -34,4 +33,4 @@ const bindings = {
     }
 }
 
-export default [Standard_FeatureStackedCard, bindings]
+export default [Standard_FeatureStackedCard, bindings, "Feature Stacked Card"]
