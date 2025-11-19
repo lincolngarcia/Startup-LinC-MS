@@ -7,7 +7,10 @@ function Standard_FeatureStacked({children}: {children: React.ReactNode}) {
 }
 
 const bindings = {
-    children: true,
+    children: [
+        "Standard_FeatureStackedCard",
+        "Standard_FeatureStackedCard"
+    ],
     props: {},
 }
 

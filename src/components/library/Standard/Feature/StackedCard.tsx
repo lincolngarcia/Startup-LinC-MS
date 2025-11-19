@@ -24,7 +24,7 @@ function Standard_FeatureStackedCard(
 }
 
 const bindings = {
-    children: false,
+    children: [],
     props: {
         action: "short string", 
         description: "short string", 

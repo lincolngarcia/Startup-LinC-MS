@@ -13,7 +13,7 @@ function Standard_IntroStacked({title, hook, paragraph}: {title: string, hook: s
 }
 
 const bindings = {
-    children: false,
+    children: [],
     props: {
         title: "short string",
         hook: "short string",
