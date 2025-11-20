@@ -54,15 +54,15 @@ export default function Dashboard() {
             </NeumorphicFlat>
             <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
                 <h3 className="text-xl bold mb-4">{pagedata?.title || "Loading..."}</h3>
-                {activeSection >= 0 ? <BackendEditor context={context} /> : <></>}
+                {activeSection >= 0 ? <BackendEditor context={context} /> : <div className='grow'></div>}
                 <div className="flex justify-between mt-2">
-                    <NeumorphicFlat><button onClick={() => renderPageSelectorModal(true)}>Select Page</button></NeumorphicFlat>
-                    <NeumorphicFlat><button onClick={() => renderDeletePageModal(true)}>Delete Page</button></NeumorphicFlat>
-                    <NeumorphicFlat ><button onClick={() => renderNewPageModal(true)}>New Page</button></NeumorphicFlat>
+                    <NeumorphicFlat className="py-2"><button onClick={() => renderPageSelectorModal(true)}>Select Page</button></NeumorphicFlat>
+                    <NeumorphicFlat className="py-2"><button onClick={() => renderDeletePageModal(true)}>Delete Page</button></NeumorphicFlat>
+                    <NeumorphicFlat className="py-2"><button onClick={() => renderNewPageModal(true)}>New Page</button></NeumorphicFlat>
                 </div>
                 <div>
                     <br />
-                    <NeumorphicFlat><button className="w-full" onClick={() => router("/")}>View Live Site</button></NeumorphicFlat>
+                    <NeumorphicFlat className="py-2"><button className="w-full" onClick={() => router("/")}>View Live Site</button></NeumorphicFlat>
                 </div>
             </NeumorphicFlat>
         </>
