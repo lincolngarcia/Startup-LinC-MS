@@ -9,14 +9,14 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
         console.log("creating new page")
         const PageDB = context.PageDB
 
-        if (PageDB["/" + pageName]) {
-            console.log("page exists")
+        if (PageDB[encodeURIComponent("/" + pageName)]){
+            alert("page already exists")
             return false;
         }
         
         const newPage = {
             title: pageName,
-            path: "/" + pageName,
+            path: encodeURIComponent("/" + pageName),
             children: [
                 {
                     componentTag: "div",
@@ -29,10 +29,15 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
             ]
         }
 
-        PageDB["/" + pageName] = newPage
-
-        context.setPagedata(newPage)
-
+        fetch("/api/pages", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newPage)
+        })
+        .then(() => context.setPagedata(newPage))
+        .then(() => context.PageDB[encodeURIComponent("/" + pageName)] = newPage)
         renderModal(false)
     }
 

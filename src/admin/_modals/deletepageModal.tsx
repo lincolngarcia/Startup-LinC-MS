@@ -1,26 +1,29 @@
 import BackendModal from "../../components/admin/Helpers/modal"
 
-export default function BackendDeletePageModal({render, renderModal, context}: {render:any, renderModal: any, context: any}) {
+export default function BackendDeletePageModal({ render, renderModal, context }: { render: any, renderModal: any, context: any }) {
 
     function deletePage() {
         console.log("deleting page")
+        if (context.pagedata.path == "/") return renderModal(false)
 
-        if (context.pagedata.title == "Homepage") return renderModal(false)
-        
-        context.setPagedata(context.PageDB["/"])
+        fetch("/api/pages?location=" + encodeURIComponent("/"))
+            .then(data => data.json())
+            .then(data => context.setPagedata(data))
+            .then(() => context.setActiveSection(-1));
 
-        delete context.PageDB["/" + context.pagedata.title]
+        fetch("/api/pages?location=" + context.pagedata.path, {method: "delete"})
 
+        delete context.PageDB["/" + context.pagedata.path]
         renderModal(false)
     }
-    
+
     return (
         <BackendModal render={render} renderModal={renderModal}>
             <div>
                 <h2 className="text-2xl font-semibold mb-4">Delete Page</h2>
 
                 <p className="text-gray-700 mb-6">
-                    Are you sure you want to delete this page?
+                    Are you sure you want to delete this page ({context.pagedata ? (context.pagedata.title || "") : ""})?
                 </p>
 
                 <div className="flex justify-end space-x-4">
