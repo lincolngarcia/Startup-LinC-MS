@@ -207,7 +207,7 @@ apiRouter.get("/pages", async (req, res) => {
     })
   } else {
     result = await DB_command(async (client) => {
-      const page = await client.db("startup").collection("pages").findOne({ "path": req.query.location })
+      const page = await client.db("startup").collection("pages").findOne({ "path": encodeURIComponent(req.query.location) })
       return page
     })
   }
@@ -223,10 +223,25 @@ apiRouter.post("/pages", async (req, res) => {
   const result = await DB_command(async (client) => {
     const newPage = {...req.body}
     delete newPage._id
-    return await client.db("startup").collection("pages").replaceOne({ path: newPage.path }, newPage, { upsert: true })
+    return await client.db("startup").collection("pages").replaceOne({ path: encodeURIComponent(newPage.path) }, newPage, { upsert: true })
   })
+  console.log("DB Result:", result)
+  if (!result.modifiedCount && !result.upsertedCount) res.status(404).end()
 
-  if (!result.modifiedCount) res.status(404).end()
+  res.status(200).end()
+})
+
+apiRouter.delete("/pages", async (req, res) => {
+  if (!req.query || !req.query.location) return res.status(401).json({ "error": "no location query" });
+  const page = req.query.location
+  if (!page) res.status(401).end()
+
+  const result = await DB_command(async (client) => {
+    console.log("Deleting page:", encodeURIComponent(page))
+    return await client.db("startup").collection("pages").deleteOne({ path: encodeURIComponent(page) })
+  })
+  console.log("DB Result:", result)
+  if (!result.deletedCount) res.status(404).end()
 
   res.status(200).end()
 })
