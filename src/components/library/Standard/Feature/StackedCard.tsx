@@ -8,7 +8,7 @@ function Standard_FeatureStackedCard(
     return (
         <div className="mt-4 mb-6 w-lg">
             <div className="relative overflow-hidden h-[164px] mb-8 bg-gray">
-                <img src={image} alt={`${image.split('/').pop()}`} width="200" height="400" className="h-full w-full object-cover  m-auto" />
+                <img src={image} alt={`${image ? image.split('/').pop() : ""}`} width="200" height="400" className="h-full w-full object-cover  m-auto" />
                 <p className="h5 absolute left-7 top-7 text-white">
                     {title}
                 </p>

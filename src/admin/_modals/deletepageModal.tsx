@@ -17,7 +17,7 @@ export default function BackendDeletePageModal({render, renderModal, context}: {
     return (
         <BackendModal render={render} renderModal={renderModal}>
             <div>
-                <h2 className="text-2xl font-semibold mb-4">Create new Page</h2>
+                <h2 className="text-2xl font-semibold mb-4">Delete Page</h2>
 
                 <p className="text-gray-700 mb-6">
                     Are you sure you want to delete this page?

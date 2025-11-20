@@ -10,7 +10,7 @@ export default function dynamicRenderTypes(parent: any, path: number[] = [], han
             const type = Library[component.componentTag][1];
             inputs.push(...Object.entries(type.props).map(([propname, proptype]: any) => {
                 return (
-                    <div className="pb-1" key={`${component.componentTag}-${currentPath.join("-")}-${propname}`}>
+                    <div className="pb-1 whitespace-nowrap overflow-hidden" key={`${component.componentTag}-${currentPath.join("-")}-${propname}`}>
                         <input
                             className="border"
                             placeholder={propname}
@@ -20,7 +20,7 @@ export default function dynamicRenderTypes(parent: any, path: number[] = [], han
                             value={component.props?.[propname] ?? ""}
                             onChange={handleInputChange}
                         />
-                        <label className="p-1">{component.componentTag.includes("_") ? component.componentTag.split("_")[1] : component.componentTag}</label>
+                        <label className="p-1 overflow-hidden">{Library[component.componentTag][2]}</label>
                         <br />
                     </div>
                 )
@@ -29,7 +29,7 @@ export default function dynamicRenderTypes(parent: any, path: number[] = [], han
 
         if (Object.keys(component).includes("content")) {
             return (
-                <div className="pb-1" key={`content-${currentPath.join("-")}`}>
+                <div className="pb-1 whitespace-nowrap overflow-hidden" key={`content-${currentPath.join("-")}`}>
                     <input
                         className="border"
                         placeholder="text"

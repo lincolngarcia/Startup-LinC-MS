@@ -1,5 +1,4 @@
 import BackendModal from "../../components/admin/Helpers/modal"
-import { useEffect, useState } from "react"
 
 export default function BackendPageSelectionModal({ render, renderModal, context }: { render: any, renderModal: any, context: any }) {
     function handleSelection(key: any) {
