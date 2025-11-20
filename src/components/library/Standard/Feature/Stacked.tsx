@@ -14,4 +14,4 @@ const bindings = {
     props: {},
 }
 
-export default [Standard_FeatureStacked, bindings, "Feature Stacked"]
+export default [Standard_FeatureStacked, bindings, "Feature Stacked", true]

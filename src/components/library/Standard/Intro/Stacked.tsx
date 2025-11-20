@@ -21,4 +21,4 @@ const bindings = {
     }
 }
 
-export default [Standard_IntroStacked, bindings, "Intro Stacked"]
+export default [Standard_IntroStacked, bindings, "Intro Stacked", true]

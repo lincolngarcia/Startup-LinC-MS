@@ -173,7 +173,7 @@ export default function BackendEditor({ context }: { context: any }) {
             <BackendModal render={render} renderModal={renderModal}>
                 <h2 className="text-2xl font-semibold mb-4">Select a Component</h2>
                 <div className="h-full">
-                    {Object.entries(Library).map(([tag, [, type, name]]: any) => {
+                    {Object.entries(Library).filter((el:any) => el[1][3]).map(([tag, [, type, name]]: any) => {
                         return (
                             <div key={"component-selector-" + tag} className="mb-4 p-2 border border-adminDarkGray rounded hover:bg-adminSuperGray cursor-pointer" onClick={() => {
                                 renderModal(false);

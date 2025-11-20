@@ -8,7 +8,8 @@ const Library: any = {
                 { children: React.ReactNode, href: string, className: string }
         ) => <a href={href} className={className}>{children}</a>,
         { children: true, props: { href: "string" } },
-        "Link"
+        "Link",
+        false
     ],
     "p": [
         (
@@ -16,7 +17,8 @@ const Library: any = {
                 { children: React.ReactNode, className: string }
         ) => <p className={className}>{children}</p>,
         { children: true, props: { } },
-        "Text"
+        "Text",
+        false
     ],
     "div": [
         (
@@ -24,7 +26,8 @@ const Library: any = {
                 { children: React.ReactNode, className: string }
         ) => <div className={className}>{children}</div>,
         { children: true, props: { } },
-        "Container"
+        "Container",
+        false
     ],
 }
 

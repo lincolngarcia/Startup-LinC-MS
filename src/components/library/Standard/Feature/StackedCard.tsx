@@ -33,4 +33,4 @@ const bindings = {
     }
 }
 
-export default [Standard_FeatureStackedCard, bindings, "Feature Stacked Card"]
+export default [Standard_FeatureStackedCard, bindings, "Feature Stacked Card", false]
