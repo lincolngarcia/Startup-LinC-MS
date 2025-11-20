@@ -5,8 +5,12 @@ export default function Preview() {
     const [activeIndex, setActiveIndex] = useState(0);
     useEffect(() => {
         window.addEventListener('message', (event) => {
-            console.log("recieved message")
-            setPageData(event.data)
+            console.log("recieved message", event)
+            if (event.data.type === "pagedata") {
+                setPageData(event.data.data)
+            }else if (event.data.type === "activeSection") {
+                setActiveIndex(event.data.data)
+            }
         })
         console.log("Preview Child: Requesting Engagment")
         window.parent.postMessage("engage connection")
@@ -17,6 +21,7 @@ export default function Preview() {
         const elementIndex = getTopLevelChildOfPreviewPane(e.target)
         setActiveIndex(elementIndex);
         if (elementIndex >= 0) window.parent.postMessage(elementIndex)
+        else console.log("Clicked outside of preview pane children", elementIndex)
     }
 
     function getTopLevelChildOfPreviewPane(element: any): number {
