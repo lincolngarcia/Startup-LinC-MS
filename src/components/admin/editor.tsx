@@ -21,10 +21,10 @@ export default function BackendEditor({ context }: { context: any }) {
             <div className="scroll grow relative">
                 {dynamicRenderTypes(subChildren, [context.activeSection], handleInputChange)}
                 <div className="absolute bottom-2 right-2 flex flex-col rounded border border-adminDarkGray bg-adminSuperGray text-adminDarkGray text-center">
-                    <button onClick={() => null} className="px-1.5 py-1 border-b border-adminDarkGray">▲</button>
+                    <button onClick={() => moveComponentUp()} className="px-1.5 py-1 border-b border-adminDarkGray">▲</button>
                     <button onClick={() => setComponentSelectorModal(true)} className="px-1.5 py-1 border-b border-adminDarkGray">+</button>
                     <button onClick={() => setComponentDeletionModal(true)} className="px-1.5 py-1 border-b border-adminDarkGray">–</button>
-                    <button onClick={() => null} className="px-1.5 py-1 border-adminDarkGray">▼</button>
+                    <button onClick={() => moveComponentDown()} className="px-1.5 py-1 border-adminDarkGray">▼</button>
                 </div>
             </div>
         </>
@@ -42,8 +42,6 @@ export default function BackendEditor({ context }: { context: any }) {
         const newPagedata = { ...context.pagedata };
 
         const path: number[] = JSON.parse(pathStr);
-
-        console.log(value, path)
 
         let node: any = newPagedata;
         for (const idx of path) {
@@ -146,14 +144,12 @@ export default function BackendEditor({ context }: { context: any }) {
                 return {
                     componentTag: child,
                     children: recursiveChildCreator(child),
-                    props: Library[tag][1].props || {}
+                    props: {...Library[tag][1].props || {}}
                 }
             });
         }
 
         function handleClick(tag: any) {
-            console.log("Selected tag:", tag);
-
             // Find a way to read the bindings to create a child for pagedata
             const childProperties = {
                 componentTag: tag,
@@ -161,7 +157,6 @@ export default function BackendEditor({ context }: { context: any }) {
                 children: recursiveChildCreator(tag)
             };
 
-            console.log(childProperties, "child properties");
             // Add child to page data
             const newPagedata = { ...context.pagedata };
             const insertIndex = (typeof context.activeSection === "number" && context.activeSection >= 0)
@@ -169,8 +164,6 @@ export default function BackendEditor({ context }: { context: any }) {
                 : newPagedata.children.length;
             newPagedata.children.splice(insertIndex, 0, childProperties);
             updatePage(newPagedata);
-
-            console.log("updated pagedata:", newPagedata);
 
             // Set active section to the inserted child
             context.setActiveSection(insertIndex);
