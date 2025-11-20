@@ -2,6 +2,7 @@ import DynamicRenderPreview from "../components/renderers/dyanmicrenderPreview"
 import { useEffect, useState } from "react";
 
 export default function Preview() {
+    const [activeIndex, setActiveIndex] = useState(0);
     useEffect(() => {
         window.addEventListener('message', (event) => {
             console.log("recieved message")
@@ -14,6 +15,7 @@ export default function Preview() {
     function handleOverride(e: any) {
         e.preventDefault()
         const elementIndex = getTopLevelChildOfPreviewPane(e.target)
+        setActiveIndex(elementIndex);
         if (elementIndex >= 0) window.parent.postMessage(elementIndex)
     }
 
@@ -39,7 +41,7 @@ export default function Preview() {
         return (
             <div className="min-w-screen">
                 <div className="max-w-[1200px] m-auto p-4 cursor-pointer" id="preview-pane" onClick={handleOverride}>
-                    {DynamicRenderPreview(pagedata.children)}
+                    {DynamicRenderPreview(pagedata.children, activeIndex)}
                 </div>
             </div>
         )

@@ -14,7 +14,6 @@ export default function BackendPreview({ context, className = "" }: { context: a
                 }
             } else {
                 context.setActiveSection(message.data)
-                console.log(`Clicked ${message.data}`)
             }
         })
     }, [])
