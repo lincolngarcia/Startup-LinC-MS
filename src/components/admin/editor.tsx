@@ -4,7 +4,8 @@ import Library from "../library/library";
 import { useState } from "react";
 
 export default function BackendEditor({ context }: { context: any }) {
-    const subChildren = context.pagedata.children[context.activeSection].children || []
+    const subChild = context.pagedata.children[context.activeSection] || []
+    console.log(subChild);
 
     const [componentSelectorModal, setComponentSelectorModal] = useState(false);
     const [componentDeletionModal, setComponentDeletionModal] = useState(false);
@@ -19,7 +20,7 @@ export default function BackendEditor({ context }: { context: any }) {
             <BackendComponentSelectorModal render={componentSelectorModal} renderModal={setComponentSelectorModal} />
             <BackendComponentDeletionModal render={componentDeletionModal} renderModal={setComponentDeletionModal} />
             <div className="scroll grow relative">
-                {dynamicRenderTypes(subChildren, [context.activeSection], handleInputChange)}
+                {dynamicRenderTypes(subChild, [context.activeSection], handleInputChange)}
                 <div className="absolute bottom-2 right-2 flex flex-col rounded border border-adminDarkGray bg-adminSuperGray text-adminDarkGray text-center">
                     <button onClick={() => moveComponentUp()} className="px-1.5 py-1 border-b border-adminDarkGray">▲</button>
                     <button onClick={() => setComponentSelectorModal(true)} className="px-1.5 py-1 border-b border-adminDarkGray">+</button>
@@ -144,7 +145,7 @@ export default function BackendEditor({ context }: { context: any }) {
                 return {
                     componentTag: child,
                     children: recursiveChildCreator(child),
-                    props: {...Library[tag][1].props || {}}
+                    props: Object.fromEntries(Object.keys(Library[tag][1] || {}).map(key => [key, ""]))
                 }
             });
         }
@@ -153,7 +154,7 @@ export default function BackendEditor({ context }: { context: any }) {
             // Find a way to read the bindings to create a child for pagedata
             const childProperties = {
                 componentTag: tag,
-                props: Library[tag][1].props,
+                props: Object.fromEntries(Object.keys(Library[tag][1] || {}).map(key => [key, ""])),
                 children: recursiveChildCreator(tag)
             };
 
