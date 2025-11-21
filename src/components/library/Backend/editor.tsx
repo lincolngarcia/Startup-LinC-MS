@@ -1,7 +1,4 @@
-import dynamic from "next/dynamic";
 import Library from "../library";
-import { useEffect } from "react";
-import { contentDirExcludeDefault } from "contentlayer/source-files";
 
 export default function BackendEditor({ context }: { context: any }) {
     const pagedata = context.pagedata

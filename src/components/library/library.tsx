@@ -7,7 +7,7 @@ const Library: any = {
             { children, href, className }:
                 { children: React.ReactNode, href: string, className: string }
         ) => <a href={href} className={className}>{children}</a>,
-        { children: true, props: { href: "string" } },
+        { children: true, props: { href: "short string" } },
         "Link",
         false
     ],

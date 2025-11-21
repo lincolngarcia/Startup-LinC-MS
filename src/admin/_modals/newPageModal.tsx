@@ -17,6 +17,7 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
         const newPage = {
             title: pageName,
             path: encodeURIComponent("/" + pageName),
+            menu: 'standard_menu',
             children: [
                 {
                     componentTag: "div",

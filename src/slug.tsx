@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DynamicRender from "./components/renderers/dyanmicrender";
+import Library from "./components/library/library";
 
 export default function Slug() {
   const slug = window.location.pathname.split("/");
@@ -17,8 +18,9 @@ export default function Slug() {
   if (page.error) return NotFound();
 
   return (
-    <div className="min-w-screen">
-      <div className="max-w-[1200px] m-auto p-4">
+    <div className="">
+      <div className="max-w-[1200px] m-auto p-4 flex flex-col items-center">
+        {Library[page.menu][0]()}
         {DynamicRender(page.children)}
       </div>
     </div>
