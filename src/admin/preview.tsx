@@ -1,14 +1,17 @@
 import DynamicRenderPreview from "../components/renderers/dyanmicrenderPreview"
 import { useEffect, useState } from "react";
+import Library from "../components/library/library";
 
 export default function Preview() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [pagedata, setPageData] = useState([] as any);
+
     useEffect(() => {
         window.addEventListener('message', (event) => {
             console.log("recieved message", event)
             if (event.data.type === "pagedata") {
                 setPageData(event.data.data)
-            }else if (event.data.type === "activeSection") {
+            } else if (event.data.type === "activeSection") {
                 setActiveIndex(event.data.data)
             }
         })
@@ -40,13 +43,15 @@ export default function Preview() {
         return Array.prototype.indexOf.call(root.children, current);
     }
 
-    const [pagedata, setPageData] = useState([] as any);
-    
+
     if (pagedata.children) {
         return (
-            <div className="min-w-screen">
-                <div className="max-w-[1200px] m-auto p-4 cursor-pointer" id="preview-pane" onClick={handleOverride}>
+            <div className="">
+                <div className="max-w-[1200px] m-auto p-4 cursor-pointer flex flex-col items-center bg-white" onClick={handleOverride}>
+                    {Library[pagedata.menu][0]()}
+                    <div className="w-full h-full" id="preview-pane">
                     {DynamicRenderPreview(pagedata.children, activeIndex)}
+                    </div>
                 </div>
             </div>
         )

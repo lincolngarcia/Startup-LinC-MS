@@ -20,12 +20,13 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
             menu: 'standard_menu',
             children: [
                 {
-                    componentTag: "div",
-                    children:[
-                        {
-                            content: "TEST DIV"
-                        }
-                    ]
+                    componentTag: "standard_introstacked",
+                    children:[],
+                    props: {
+                        title: "",
+                        hook: "",
+                        paragraph: ""
+                    }
                 }
             ]
         }
@@ -38,6 +39,7 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
             body: JSON.stringify(newPage)
         })
         .then(() => context.setPagedata(newPage))
+        .then(() => context.setActiveSection(0))
         .then(() => context.PageDB[encodeURIComponent("/" + pageName)] = newPage)
         renderModal(false)
     }

@@ -12,9 +12,9 @@ function Standard_Menu() {
                     </p>
                 </button>
                 <div className="flex justify-between text-lg text-gray font-medium">
-                    <a href="mailto:lincolngarciadevelopment@gmail.com" className="hidden lg:block pt-1 lg:mr-14">Donate pls</a>
-                    <a href='https://github.com/lincolngarcia/Startup-LinC-MS' className="hidden lg:block pt-1 lg:mr-14">Github</a>
-                    <a href='/login' className="hidden lg:block pt-1 lg:mr-22">Login</a>
+                    <a href="mailto:lincolngarciadevelopment@gmail.com" className="hidden md:block pt-1 md:mr-14">Donate pls</a>
+                    <a href='https://github.com/lincolngarcia/Startup-LinC-MS' className="hidden md:block pt-1 md:mr-14">Github</a>
+                    <a href='/login' className="hidden md:block pt-1 md:mr-22">Login</a>
                     <img src="/svg/hamburger.svg" className="relative -top-1 h-12 cursor-pointer" />
                 </div>
             </div>

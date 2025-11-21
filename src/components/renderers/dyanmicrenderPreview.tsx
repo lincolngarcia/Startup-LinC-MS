@@ -8,7 +8,7 @@ export default function DyanmicRenderPreview(parent: any, activeIndex: number, p
 
             if (Tag && depth == 0) {
                 return (
-                    <div className={"w-full h-full border border-dashed p-1 m-1" + (activeIndex == index ? " border-adminBlue" : "")} key={key + "-wrapper"}>
+                    <div className={"w-full h-full border border-dashed p-1 m-1 flex justify-center" + (activeIndex == index ? " border-adminBlue" : "")} key={key + "-wrapper"}>
                         <Tag key={key} {...component.props}>
                             {DyanmicRenderPreview(component.children, -1, key, depth + 1)}
                         </Tag>
