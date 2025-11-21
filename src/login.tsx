@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import NeumorphicFlat from "./components/library/Backend/Neumorphic/flat";
+import NeumorphicFlat from "./components/admin/Neumorphic/flat";
 import { useRef } from "react";
 
 export default function Page() {

@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect, useState } from 'react';
 
 // Import Components
-import NeumorphicFlat from '../components/library/Backend/Neumorphic/flat';
-import NeumorphicPressed from '../components/library/Backend/Neumorphic/pressed';
-import BackendEditor from "../components/library/Backend/editor"
+import NeumorphicFlat from "../components/admin/Neumorphic/flat"
+import NeumorphicPressed from '../components/admin/Neumorphic/pressed';
+import BackendEditor from "../components/admin/editor"
 
 // Import Modals
 import BackendNewPageModal from "./_modals/newPageModal"

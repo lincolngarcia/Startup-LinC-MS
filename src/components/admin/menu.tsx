@@ -1,5 +1,5 @@
-import NeumorphicFlat from "../../components/library/Backend/Neumorphic/flat"
-import NeumorphicPressed from "../../components/library/Backend/Neumorphic/pressed"
+import NeumorphicFlat from "../../components/admin/Neumorphic/flat"
+import NeumorphicPressed from "../../components/admin/Neumorphic/pressed"
 import { Link } from "react-router-dom";
 
 export default function BackendMenu({className = '', active}: {active: string, className?: string}) {

@@ -29,7 +29,7 @@ export default function BackendPreview({ context, className = "" }: { context: a
 
     const iframe: any = useRef(null);
 
-    return (<div className="transform-[scale(0.75)] origin-top-left w-[133.33%] h-[133.33%]">
+    return (<div className="transform-[scale(0.6666)] origin-top-left w-[150%] h-[150%]">
         <iframe ref={iframe} src="/admin/preview" className={classes} />
     </div>)
 }

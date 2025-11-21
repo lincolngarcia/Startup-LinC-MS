@@ -1,4 +1,4 @@
-import Grid from "./../../Backend/Helpers/goldengrid";
+import Grid from "./../../../admin/Helpers/goldengrid"
 
 function Standard_IntroStacked({ title, hook, paragraph }: { title: string, hook: string, paragraph: string }) {
     return (

@@ -7,21 +7,10 @@ export default function dynamicRenderTypes(parent: any, path: number[], handleIn
         const type = Library[parent.componentTag][1];
         console.log(type)
         Object.entries(type.props).map(([propname, prototype]: any) => {
-            inputs.push(
-                <div className="pb-1 whitespace-nowrap overflow-hidden" key={`${parent.componentTag}-${path}-${propname}`}>
-                    <input
-                        className="border"
-                        placeholder={propname}
-                        type="text"
-                        data-path={JSON.stringify(path)}
-                        data-prop={propname}
-                        value={parent.props[propname]}
-                        onChange={handleInputChange}
-                    />
-                    <label className="p-1 overflow-hidden">{Library[parent.componentTag][2]}</label>
-                    <br /> {/*is this neccessary*/}
-                </div>
-            )
+            // Find out if the prototype exists in the regular libary
+            // TODO: dynamic typing
+            console.log(propname, prototype)
+            inputs.push(InputLibrary[prototype](propname, prototype, parent, path, handleInputChange) || null);
         })
     }
 
@@ -56,61 +45,25 @@ export default function dynamicRenderTypes(parent: any, path: number[], handleIn
     }
 
     return inputs.flatMap(x => x)
+}
 
-    /*
-    return parent.flatMap((component: any, index: number) => {
 
-        const currentPath = [...path, index];
-        const inputs: any = []
-
-        if (component.componentTag) {
-            const type = Library[component.componentTag][1];
-            inputs.push(...Object.entries(type.props).map(([propname, proptype]: any) => {
-                return (
-                    <div className="pb-1 whitespace-nowrap overflow-hidden" key={`${component.componentTag}-${currentPath.join("-")}-${propname}`}>
-                        <input
-                            className="border"
-                            placeholder={propname}
-                            type="text"
-                            data-path={JSON.stringify(currentPath)}
-                            data-prop={propname}
-                            value={component.props?.[propname] ?? ""}
-                            onChange={handleInputChange}
-                        />
-                        <label className="p-1 overflow-hidden">{Library[component.componentTag][2]}</label>
-                        <br />
-                    </div>
-                )
-            }))
-        }
-
-        if (Object.keys(component).includes("content")) {
-            return (
-                <div className="pb-1 whitespace-nowrap overflow-hidden" key={`content-${currentPath.join("-")}`}>
-                    <input
-                        className="border"
-                        placeholder="text"
-                        type="text"
-                        data-path={JSON.stringify(currentPath)}
-                        data-prop="text"
-                        value={component.content}
-                        onChange={handleInputChange}
-                    />
-                    <label className="p-1">Text</label>
-                    <br />
-                </div>
-            )
-        }
-
-        if (component.children && component.children.length) {
-            inputs.push(
-                <div key={`children-wrap-${currentPath.join("-")}`}>
-                    {dynamicRenderTypes(component.children, currentPath, handleInputChange)}
-                </div>
-            )
-        }
-
-        return inputs
-    })
-        */
+const InputLibrary: any = {
+    "short string": (propname: any, prototype: any, parent: any, path: any, handleInputChange: any) => (
+        <div className="pb-1 whitespace-nowrap overflow-hidden" key={`${parent.componentTag}-${path}-${propname}`}>
+        <input
+            className="border"
+            placeholder={propname}
+            type="text"
+            data-path={JSON.stringify(path)}
+            data-prop={propname}
+            value={parent.props[propname]}
+            onChange={handleInputChange}
+        />
+        <label className="p-1 overflow-hidden">{Library[parent.componentTag][2]}</label>
+        <br /> {/*is this neccessary*/}
+    </div>),
+    "array of short string": (propname: any, prototype: any, parent: any, path: any, handleInputChange: any) => (
+        <div>This is where the bullet list should come in</div>
+    )
 }

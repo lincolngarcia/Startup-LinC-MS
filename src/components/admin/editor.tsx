@@ -1,6 +1,6 @@
-import BackendModal from "../../admin/Helpers/modal"
-import dynamicRenderTypes from "../../renderers/dynamicrenderTypes";
-import Library from "../library";
+import BackendModal from "./Helpers/modal"
+import dynamicRenderTypes from "../renderers/dynamicrenderTypes";
+import Library from "../library/library";
 import { useState } from "react";
 
 export default function BackendEditor({ context }: { context: any }) {
@@ -225,6 +225,3 @@ export default function BackendEditor({ context }: { context: any }) {
     }
 }
 
-const InputLibrary: any = {
-    "short string": <input type="text" />,
-}
