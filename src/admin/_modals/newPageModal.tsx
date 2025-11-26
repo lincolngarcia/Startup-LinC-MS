@@ -9,30 +9,38 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
         console.log("creating new page")
         const PageDB = context.PageDB
 
-        if (PageDB["/" + pageName]) {
-            console.log("page exists")
+        if (PageDB[encodeURIComponent("/" + pageName)]){
+            alert("page already exists")
             return false;
         }
         
         const newPage = {
             title: pageName,
-            path: "/" + pageName,
+            path: encodeURIComponent("/" + pageName),
+            menu: 'standard_menu',
             children: [
                 {
-                    componentTag: "div",
-                    children:[
-                        {
-                            content: "TEST DIV"
-                        }
-                    ]
+                    componentTag: "standard_introstacked",
+                    children:[],
+                    props: {
+                        title: "",
+                        hook: "",
+                        paragraph: ""
+                    }
                 }
             ]
         }
 
-        PageDB["/" + pageName] = newPage
-
-        context.setPagedata(newPage)
-
+        fetch("/api/pages", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newPage)
+        })
+        .then(() => context.setPagedata(newPage))
+        .then(() => context.setActiveSection(0))
+        .then(() => context.PageDB[encodeURIComponent("/" + pageName)] = newPage)
         renderModal(false)
     }
 

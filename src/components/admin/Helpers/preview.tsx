@@ -10,23 +10,26 @@ export default function BackendPreview({ context, className = "" }: { context: a
                 console.log("Preview Parent: Engagement Request Acknowledged")
                 if (iframe.current) {
                     console.log("Preview Parent: Sending Initial Page Data:", context.pagedata)
-                    iframe.current.contentWindow.postMessage(context.pagedata, "*")
+                    iframe.current.contentWindow.postMessage({type: "pagedata", data: context.pagedata}, "*")
                 }
             } else {
                 context.setActiveSection(message.data)
-                console.log(`Clicked ${message.data}`)
             }
         })
     }, [])
 
     // Update Page
     useEffect(() => {
-        iframe.current.contentWindow.postMessage(context.pagedata, "*")
+        iframe.current.contentWindow.postMessage({type: "pagedata", data: context.pagedata}, "*")
     }, [context.pagedata])
+
+    useEffect(() => {
+        iframe.current.contentWindow.postMessage({type: "activeSection", data: context.activeSection}, "*")
+    }, [context.activeSection])
 
     const iframe: any = useRef(null);
 
-    return (<div className="transform-[scale(0.9)] origin-top-left w-[111.11%] h-[111.11%]">
+    return (<div className="transform-[scale(0.666666)] origin-top-left w-[150%] h-[150%]">
         <iframe ref={iframe} src="/admin/preview" className={classes} />
     </div>)
 }

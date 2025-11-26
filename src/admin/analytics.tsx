@@ -1,5 +1,5 @@
-import NeumorphicFlat from "../components/library/Backend/Neumorphic/flat"
-import NeumorphicPressed from "../components/library/Backend/Neumorphic/pressed"
+import NeumorphicFlat from "../components/admin/Neumorphic/flat"
+import NeumorphicPressed from "../components/admin/Neumorphic/pressed"
 import BackendMenu from "../components/admin/menu"
 import Grid from "../components/admin/Helpers/goldengrid"
 import { Suspense, useEffect, useState } from "react";
