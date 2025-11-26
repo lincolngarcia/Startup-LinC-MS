@@ -63,7 +63,54 @@ const InputLibrary: any = {
         <label className="p-1 overflow-hidden">{Library[parent.componentTag][2]}</label>
         <br /> {/*is this neccessary*/}
     </div>),
-    "array of short string": (propname: any, prototype: any, parent: any, path: any, handleInputChange: any) => (
-        <div>This is where the bullet list should come in</div>
-    )
+    "array of short string": (propname: any, prototype: any, parent: any, path: any, handleInputChange: any) => {
+        const values: string[] = (parent.props && Array.isArray(parent.props[propname])) ? parent.props[propname] : [];
+
+        const emit = (newValues: string[]) => {
+            // create a synthetic event shaped like the real onChange handler expects
+            const e: any = {
+                target: {
+                    dataset: { path: JSON.stringify(path), prop: propname },
+                    value: newValues
+                }
+            };
+            handleInputChange(e);
+        };
+
+        const setAt = (index: number, val: string) => {
+            const next = values.slice();
+            next[index] = val;
+            emit(next);
+        };
+
+        const add = () => emit([...values, ""]);
+        const removeAt = (index: number) => emit(values.filter((_, i) => i !== index));
+
+        return (
+            <div className="pb-1 whitespace-nowrap overflow-hidden" key={`${parent.componentTag}-${path}-${propname}`}>
+                <ul id={`${parent.componentTag}-${path}-${propname}-ul`}>
+                    <li>
+                        {`${propname} `}
+                        <button className="border p-1" onClick={add}>+</button>
+                    </li>
+
+                    {values.map((val: string, idx: number) => (
+                        <li key={`${parent.componentTag}-${path}-${propname}-item-${idx}`}>
+                            <input
+                                className="border"
+                                placeholder={`${propname} item`}
+                                type="text"
+                                data-path={JSON.stringify(path)}
+                                data-prop={propname}
+                                data-index={idx}
+                                value={val}
+                                onChange={(ev: any) => setAt(idx, ev.target.value)}
+                            />
+                            <button className="border p-1" onClick={() => removeAt(idx)}>–</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
 }
