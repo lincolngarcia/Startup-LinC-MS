@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const path = require("path")
+const http = require("http");
 const app = express();
 const { BetaAnalyticsDataClient } = require("@google-analytics/data")
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const WebSocket = require('ws');
 
 const authCookieName = 'lincms_token';
 const propertyId = '511603332';
@@ -307,6 +309,141 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+function setDeep(obj, path, prop, value) {
+  console.log("Setting deep", path, "to", value, "on", obj);
+  let node = obj;
+  for (const idx of path) {
+    if (!node.children || !node.children[idx]) {
+      console.warn("Invalid path while updating pagedata", path);
+      return;
+    }
+    node = node.children[idx];
+  }
+
+  if (node.props) {
+    node.props = node.props || {};
+    node.props[prop] = value;
+  } else if (node.content || node.content === "") {
+    node.content = value
+  } else {
+    node[prop] = value
+  }
+  return obj;
+}
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server }); // IMPORTANT
+const activePages = {};
+const bouncedRequests = {};
+
+wss.on("connection", async (ws, request) => {
+  switch (request.url) {
+    case "/live-page-connection":
+      ws.path = null;
+      console.log("WS connection established:", request.url);
+
+      ws.on("message", (messageStr) => {
+        const message = JSON.parse(messageStr.toString());
+        switch (message.type) {
+          case "page-update":
+            // Update the in-memory page data
+            activePages[ws.path] = setDeep(activePages[ws.path], message.path, message.prop, message.value);
+            console.log(activePages[ws.path])
+
+            // Broadcast to all connections viewing the same page
+            wss.clients.forEach(client => {
+              if (client !== ws && client.readyState === WebSocket.OPEN && client.path === ws.path) {
+                console.log(message)
+                client.send(messageStr.toString());
+              }
+            });
+
+            // Debounce the database update to avoid excessive writes
+            function createUpdateHandler() {
+              // `activeRequest` will hold the ongoing fetch Promise (or null when idle)
+              let activeRequest = null;
+              // `nextData` holds the latest queued payload to send after the active request
+              let nextData = null;
+              // `nextScheduled` indicates whether there is a queued request pending
+              let nextScheduled = false;
+
+              async function sendRequest(data) {
+                if (!ws.path) {
+                  console.warn('sendRequest called but ws.path is not set');
+                  return;
+                }
+
+                // Prefer the explicit `data` param (queued payload). Fall back to current in-memory page.
+                const payload = data || activePages[ws.path];
+
+                try {
+                  activeRequest = fetch(`${request.headers.origin}/api/pages?location=${encodeURIComponent(ws.path)}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                  });
+
+                  await activeRequest;
+                } catch (err) {
+                  console.error('Failed to save page update', err);
+                } finally {
+                  // Mark no active request
+                  activeRequest = null;
+
+                  // If a next request was queued while this one ran, send it now
+                  if (nextScheduled) {
+                    const dataToSend = nextData;
+                    nextData = null;
+                    nextScheduled = false;
+                    // Fire-and-forget the next request; it will manage further queued requests itself
+                    sendRequest(dataToSend);
+                  }
+                }
+              }
+
+              return function onInputChange(data) {
+                // No active request — send immediately
+                if (!activeRequest) {
+                  sendRequest(data);
+                  return;
+                }
+
+                // Active request but nothing queued yet — queue this payload
+                if (!nextScheduled) {
+                  nextData = data;
+                  nextScheduled = true;
+                  return;
+                }
+
+                // Active request and a queued request already exist — replace queued payload with newest
+                nextData = data;
+              };
+            }
+
+            bouncedRequests[ws.path] = bouncedRequests[ws.path] || createUpdateHandler();
+            bouncedRequests[ws.path](activePages[ws.path]);
+
+            break;
+
+          case "page-change":
+            ws.path = message.path;
+            fetch(`${request.headers.origin}/api/pages?location=${encodeURIComponent(ws.path)}`)
+              .then(data => data.json())
+              .then(data => {
+                ws.send(JSON.stringify({ type: "page-change", path: message.path, value: data }));
+                activePages[ws.path] = data;
+              })
+            break;
+        }
+      });
+
+      break;
+    default:
+      ws.close();
+      return;
+  }
+});
+
+server.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

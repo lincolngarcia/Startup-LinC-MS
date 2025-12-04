@@ -145,8 +145,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - It is in the index.js file
+- [x] **Frontend makes WebSocket connection** - It is in the src/admin/dashboard file
+- [x] **Data sent over WebSocket connection** - When updates are made to the webpage, the updates are sent through the websocket
+- [x] **WebSocket data displayed** - The updates are displayed in the center of the /admin/dashboard screen
+- [x] **Application is fully functional** - yup.

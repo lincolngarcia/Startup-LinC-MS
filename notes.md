@@ -45,3 +45,6 @@ It The API as pretty simple to work with, although I now know not to submit priv
 
 It was pretty easy to set up, but If I could go back I would not make it cloud based for performance
 
+## Websocket
+
+This was a fun project. the ws node library has a lot of the functions out of the box, however it is important to note that websocket needs to exist on a http server, not an express file server.

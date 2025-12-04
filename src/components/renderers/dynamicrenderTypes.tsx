@@ -1,15 +1,12 @@
 import Library from "../library/library";
 
 export default function dynamicRenderTypes(parent: any, path: number[], handleInputChange: any): React.ReactNode {
-    console.log("iam", parent)
     const inputs = []
     if (parent.componentTag) {
         const type = Library[parent.componentTag][1];
-        console.log(type)
         Object.entries(type.props).map(([propname, prototype]: any) => {
             // Find out if the prototype exists in the regular libary
             // TODO: dynamic typing
-            console.log(propname, prototype)
             inputs.push(InputLibrary[prototype](propname, prototype, parent, path, handleInputChange) || null);
         })
     }

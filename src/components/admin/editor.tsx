@@ -1,15 +1,13 @@
 import BackendModal from "./Helpers/modal"
 import dynamicRenderTypes from "../renderers/dynamicrenderTypes";
 import Library from "../library/library";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BackendEditor({ context }: { context: any }) {
     const subChild = context.pagedata.children[context.activeSection] || []
-    console.log(subChild);
 
     const [componentSelectorModal, setComponentSelectorModal] = useState(false);
     const [componentDeletionModal, setComponentDeletionModal] = useState(false);
-    const [updatePage, setUpdatePage] = useState(() => createInputUpdateHandler())
 
     if (!context.pagedata || context.pagedata.children.length === 0) {
         return <p>Select a page.</p>
@@ -42,6 +40,7 @@ export default function BackendEditor({ context }: { context: any }) {
 
         const newPagedata = { ...context.pagedata };
 
+        // Update the data in the editor
         const path: number[] = JSON.parse(pathStr);
 
         let node: any = newPagedata;
@@ -60,60 +59,8 @@ export default function BackendEditor({ context }: { context: any }) {
             node.content = value
         }
 
-        console.log(newPagedata)
-
-        updatePage(newPagedata);
-    }
-
-    function createInputUpdateHandler() {
-        let activeRequest: any = false;   // Promise of the active fetch
-        let nextData: any = null;        // Holds data for the next queued request
-        let nextScheduled = false;  // Whether a next request is scheduled
-
-        async function sendRequest(data: any) {
-            try {
-                activeRequest = fetch("/api/pages", {
-                    method: "post",
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-type': 'application/json; charset=UTF-8',
-                    },
-                })
-
-                await activeRequest;
-            } catch (err) {
-                console.error("Fetch failed:", err);
-            } finally {
-                activeRequest = null;
-
-                // If there’s a next request scheduled, trigger it
-                if (nextScheduled) {
-                    const dataToSend = nextData;
-                    nextData = null;
-                    nextScheduled = false;
-                    sendRequest(dataToSend);
-                }
-            }
-        }
-
-        return function onInputChange(data: any) {
-            context.setPagedata(data)
-            // Case 1: No active request → send immediately
-            if (!activeRequest) {
-                sendRequest(data);
-                return;
-            }
-
-            // Case 2: Active request but no next scheduled → queue one
-            if (!nextScheduled) {
-                nextData = data;
-                nextScheduled = true;
-                return;
-            }
-
-            // Case 3: Active request and next scheduled → update the next data
-            nextData = data;
-        };
+        context.setPagedata(newPagedata);
+        context.webSocket.send(JSON.stringify({ type: "page-update", path, prop, value }));
     }
 
     function moveComponentUp() {
@@ -123,7 +70,9 @@ export default function BackendEditor({ context }: { context: any }) {
 
         const [item] = newPagedata.children.splice(idx, 1);
         newPagedata.children.splice(idx - 1, 0, item);
-        updatePage(newPagedata);
+
+        context.setPagedata(newPagedata);
+        context.webSocket.send(JSON.stringify({ type: "page-update", path: [], prop: "children", value: newPagedata.children }));
         context.setActiveSection(idx - 1);
     }
 
@@ -134,7 +83,9 @@ export default function BackendEditor({ context }: { context: any }) {
 
         const [item] = newPagedata.children.splice(idx, 1);
         newPagedata.children.splice(idx + 1, 0, item);
-        updatePage(newPagedata);
+
+        context.setPagedata(newPagedata);
+        context.webSocket.send(JSON.stringify({ type: "page-update", path: [], prop: "children", value: newPagedata.children }));
         context.setActiveSection(idx + 1);
     }
 
@@ -164,7 +115,9 @@ export default function BackendEditor({ context }: { context: any }) {
                 ? context.activeSection + 1
                 : newPagedata.children.length;
             newPagedata.children.splice(insertIndex, 0, childProperties);
-            updatePage(newPagedata);
+
+            context.setPagedata(newPagedata);
+            context.webSocket.send(JSON.stringify({ type: "page-update", path: [], prop: "children", value: newPagedata.children }));
 
             // Set active section to the inserted child
             context.setActiveSection(insertIndex);
@@ -174,7 +127,7 @@ export default function BackendEditor({ context }: { context: any }) {
             <BackendModal render={render} renderModal={renderModal}>
                 <h2 className="text-2xl font-semibold mb-4">Select a Component</h2>
                 <div className="h-full">
-                    {Object.entries(Library).filter((el:any) => el[1][3]).map(([tag, [, type, name]]: any) => {
+                    {Object.entries(Library).filter((el: any) => el[1][3]).map(([tag, [, type, name]]: any) => {
                         return (
                             <div key={"component-selector-" + tag} className="mb-4 p-2 border border-adminDarkGray rounded hover:bg-adminSuperGray cursor-pointer" onClick={() => {
                                 renderModal(false);
@@ -193,7 +146,8 @@ export default function BackendEditor({ context }: { context: any }) {
         function deleteComponent() {
             const newPagedata = { ...context.pagedata };
             newPagedata.children.splice(context.activeSection, 1);
-            updatePage(newPagedata);
+            context.setPagedata(newPagedata);
+            context.webSocket.send(JSON.stringify({ type: "page-update", path: [], prop: "children", value: newPagedata.children }));
             context.setActiveSection(context.activeSection - 1);
             renderModal(false);
         }
