@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 
 // Import Components
 import NeumorphicFlat from "../components/admin/Neumorphic/flat"
@@ -24,15 +24,69 @@ export default function Dashboard() {
     const [pagedata, setPagedata]: any = useState()
     const [activeSection, setActiveSection]: any = useState();
 
+    // Set up web socket connection
+    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    const host = window.location.host; // includes hostname + port
+    const ws = useRef(null) as any
+
     useEffect(() => {
         fetch("/api/pages?location=_lincms_all")
             .then(data => data.json())
             .then(data => setAllPages(data))
 
-        fetch("/api/pages?location=/")
-            .then(data => data.json())
-            .then(data => setPagedata(data))
-            .then(() => setActiveSection(0))
+        ws.current = new WebSocket(`${protocol}//${host}/live-page-connection`);
+        ws.current.onopen = () => {
+            console.log('WebSocket connected');
+            ws.current.send(JSON.stringify({ type: "page-change", path: "/" }));
+        };
+
+        ws.current.onmessage = (event: any) => {
+            console.log(event)
+            const response = JSON.parse(event.data);
+            switch (response.type) {
+                case "page-change":
+                    setPagedata(response.value);
+                    setActiveSection(0);
+                    break;
+                case "page-update":
+                    setPagedata((prevPagedata: any) => {
+                        const newPagedata = { ...prevPagedata };
+
+                        // Update the data in the editor
+                        const path: number[] = response.path;
+
+                        let node: any = newPagedata;
+
+                        for (const idx of path) {
+                            if (!node.children || !node.children[idx]) {
+                                console.warn("Invalid path while updating pagedata", path);
+                                return;
+                            }
+                            node = node.children[idx];
+                        }
+
+                        if (node.props) {
+                            node.props = node.props || {};
+                            node.props[response.prop] = response.value;
+                        } else if (node.content || node.content === "") {
+                            node.content = response.value
+                        }else{
+                            node[response.prop] = response.value
+                        }
+
+                        return newPagedata;
+                    });
+                    break;
+            }
+        };
+
+        ws.current.onclose = () => {
+            console.log('WebSocket disconnected');
+        };
+
+        ws.current.onerror = (error: any) => {
+            console.error('WebSocket error:', error);
+        }
     }, [])
 
 
@@ -41,7 +95,8 @@ export default function Dashboard() {
         "pagedata": pagedata,
         "setPagedata": setPagedata,
         "activeSection": activeSection,
-        "setActiveSection": setActiveSection
+        "setActiveSection": setActiveSection,
+        "webSocket": ws.current,
     }
 
     return (
@@ -50,7 +105,7 @@ export default function Dashboard() {
             <BackendDeletePageModal render={deletePage} renderModal={renderDeletePageModal} context={context} />
             <BackendPageSelectionModal render={pageSelectorModal} renderModal={renderPageSelectorModal} context={context} />
             <NeumorphicFlat className="lg:col-start-3 lg:col-end-9">
-                    {pagedata ? <BackendPreview context={context} /> : <></>}
+                {pagedata ? <BackendPreview context={context} /> : <></>}
             </NeumorphicFlat>
             <NeumorphicFlat className="h-full lg:col-start-9 lg:col-end-13 flex flex-col">
                 <h3 className="text-xl bold mb-4">{pagedata?.title || "Loading..."}</h3>
