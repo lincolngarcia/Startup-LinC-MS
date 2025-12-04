@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const path = require("path")
+const http = require("http");
 const app = express();
 const { BetaAnalyticsDataClient } = require("@google-analytics/data")
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const WebSocket = require('ws');
 
 const authCookieName = 'lincms_token';
 const propertyId = '511603332';
@@ -215,6 +217,7 @@ apiRouter.get("/pages", async (req, res) => {
   else return res.json({ "error": "page not found" })
 })
 
+
 apiRouter.post("/pages", async (req, res) => {
   if (!req.body) res.status(401).end()
   const page = req.body.title
@@ -307,6 +310,24 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server }); // IMPORTANT
+
+/*{
+  type: "page-update" or "page-change" or "component-swap" or "component-delete" or "component-add"
+  path: string
+  value: new value
+}*/
+const activePages = {};
+
+wss.on("connection", (ws, request) => {
+  console.log("WS connection established:", request.url);
+
+  ws.on("message", (message) => {
+    console.log(`Received message => ${message}`);
+  });
+});
+
+server.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
