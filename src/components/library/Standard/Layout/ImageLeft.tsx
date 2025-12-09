@@ -5,7 +5,7 @@ function ImageLeft({ image, Tagline, Title, Paragraph, Bullets, Action }: {image
     // Underscores removed from class names and all numeric values divided by 4 (rounded)
     return (
         <div className="container lg:flex lg:justify-between lg:gap-32 mt-14 md:mt-19 lg:mt-25 mb-14 md:mb-19 lg:mb-25">
-            <img src={image} className="aspect-square lg:w-[45%] rounded-2xl mb-10 md:mb-9" alt="" />
+            <img src={image} className="aspect-square lg:w-[45%] rounded-2xl mb-10 md:mb-9 object-cover" alt="" />
             <div className="lg:w-1/2">
                 <p className="hidden lg:block text-xl mb-7">
                     {Tagline}

@@ -15,7 +15,7 @@ function Standard_Menu() {
                     <a href="mailto:lincolngarciadevelopment@gmail.com" className="hidden md:block pt-1 md:mr-14">Donate pls</a>
                     <a href='https://github.com/lincolngarcia/Startup-LinC-MS' className="hidden md:block pt-1 md:mr-14">Github</a>
                     <a href='/login' className="hidden md:block pt-1 md:mr-22">Login</a>
-                    <img src="/svg/hamburger.svg" className="relative -top-1 h-12 cursor-pointer" />
+                    {/*<img src="/svg/hamburger.svg" className="relative -top-1 h-12 cursor-pointer" />*/}
                 </div>
             </div>
         </>

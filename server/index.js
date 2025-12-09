@@ -427,10 +427,10 @@ wss.on("connection", async (ws, request) => {
 
           case "page-change":
             ws.path = message.path;
-            fetch(`${request.headers.origin}/api/pages?location=${encodeURIComponent(ws.path)}`)
+            fetch(`${request.headers.origin}/api/pages?location=${ws.path}`)
               .then(data => data.json())
               .then(data => {
-                ws.send(JSON.stringify({ type: "page-change", path: message.path, value: data }));
+                ws.send(JSON.stringify({ type: "page-change", path: ws.path, value: data }));
                 activePages[ws.path] = data;
               })
             break;

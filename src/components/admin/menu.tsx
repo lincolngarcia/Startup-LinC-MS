@@ -10,8 +10,8 @@ export default function BackendMenu({className = '', active}: {active: string, c
                 <ul className="text-xl">
                     <li className="my-3"><NeumorphicPressed active={(active == "Dashboard")} ><Link to="/admin/dashboard">Home</Link></NeumorphicPressed></li>
                     <li className="my-3"><NeumorphicPressed active={(active == "Analytics")} ><Link to="/admin/analytics">Analytics</Link></NeumorphicPressed></li>
-                    <li className="my-3"><NeumorphicPressed active={(active == "Pages")} >Pages</NeumorphicPressed></li>
-                    <li className="my-3"><NeumorphicPressed active={(active == "Settings")} >Settings</NeumorphicPressed></li>
+                    {/*<li className="my-3"><NeumorphicPressed active={(active == "Pages")} >Pages</NeumorphicPressed></li>*/}
+                    {/*<li className="my-3"><NeumorphicPressed active={(active == "Settings")} >Settings</NeumorphicPressed></li>*/}
                 </ul>
             </nav>
         </NeumorphicFlat>

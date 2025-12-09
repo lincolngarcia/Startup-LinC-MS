@@ -3,11 +3,7 @@ import BackendModal from "../../components/admin/Helpers/modal"
 export default function BackendPageSelectionModal({ render, renderModal, context }: { render: any, renderModal: any, context: any }) {
     function handleSelection(key: any, page:any) {
         console.log("selecting page", page)
-        fetch("/api/pages?location=" + page.path)
-            .then(data => data.json())
-            .then(data => context.setPagedata(data))
-            .then(() => context.setActiveSection(-1));
-
+        context.webSocket.send(JSON.stringify({ type: "page-change", path: page.path }));
         renderModal(false)
     }
 
