@@ -21,6 +21,7 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
             children: [
                 {
                     componentTag: "standard_introstacked",
+                    menu: "standard_menu",
                     children:[],
                     props: {
                         title: "",
@@ -41,6 +42,8 @@ export default function BackendNewPageModal({render, renderModal, context}: {ren
         .then(() => context.setPagedata(newPage))
         .then(() => context.setActiveSection(0))
         .then(() => context.PageDB[encodeURIComponent("/" + pageName)] = newPage)
+        .then(() => console.log(context.PageDB))
+        .then(() => context.webSocket.send(JSON.stringify({ type: "page-change", path: encodeURIComponent("/" + pageName)})))
         renderModal(false)
     }
 

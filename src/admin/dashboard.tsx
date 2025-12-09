@@ -32,12 +32,21 @@ export default function Dashboard() {
     useEffect(() => {
         fetch("/api/pages?location=_lincms_all")
             .then(data => data.json())
-            .then(data => setAllPages(data))
+            .then(data => {
+                const pages: any = {}
+                data.map((el: any) => {
+                    pages[el.path] = el
+                })
+                return pages
+            })
+            .then(data => {
+                setAllPages(data); console.log(data)
+            })
 
         ws.current = new WebSocket(`${protocol}//${host}/live-page-connection`);
         ws.current.onopen = () => {
             console.log('WebSocket connected');
-            ws.current.send(JSON.stringify({ type: "page-change", path: "/" }));
+            ws.current.send(JSON.stringify({ type: "page-change", path: encodeURIComponent("/") }));
         };
 
         ws.current.onmessage = (event: any) => {
@@ -70,7 +79,7 @@ export default function Dashboard() {
                             node.props[response.prop] = response.value;
                         } else if (node.content || node.content === "") {
                             node.content = response.value
-                        }else{
+                        } else {
                             node[response.prop] = response.value
                         }
 

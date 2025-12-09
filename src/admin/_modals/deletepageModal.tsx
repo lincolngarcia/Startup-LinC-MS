@@ -12,7 +12,7 @@ export default function BackendDeletePageModal({ render, renderModal, context }:
             .then(() => context.setActiveSection(0));
 
         fetch("/api/pages?location=" + context.pagedata.path, {method: "delete"})
-
+        console.log(context.PageDB)
         delete context.PageDB[context.pagedata.path]
         renderModal(false)
     }
