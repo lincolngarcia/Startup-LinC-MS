@@ -9,7 +9,17 @@ export default function BackendHeader({title}: {title?: string}) {
                 <ul className="flex gap-4">
                     <li><Link to="/admin/dashboard" className="text-adminBlue">Dashboard</Link></li>
                     <li><Link to="/admin/analytics" className="text-adminBlue">Analytics</Link></li>
-                    <li><Link to="/login" className="text-adminBlue">Login</Link></li>
+                    <li>
+                        <button
+                            onClick={async () => {
+                                await fetch("/api/logout", {
+                                    method: "DELETE",
+                                    credentials: "include"
+                                });
+
+                                window.location.href = "/login";
+                            }}
+                            className="text-adminBlue">Logout</button></li>
                 </ul>
             </nav>
         </header>
