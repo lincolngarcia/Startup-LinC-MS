@@ -192,6 +192,7 @@ export default function BackendEditor({ context }: { context: any }) {
     function BackendComponentDeletionModal({ render, renderModal }: { render: boolean, renderModal: any }) {
         function deleteComponent() {
             const newPagedata = { ...context.pagedata };
+            if (newPagedata.children.length == 1) return renderModal(false);
             newPagedata.children.splice(context.activeSection, 1);
             updatePage(newPagedata);
             context.setActiveSection(context.activeSection - 1);
