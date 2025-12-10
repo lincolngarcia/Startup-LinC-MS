@@ -4,7 +4,7 @@ export default function BackendDeletePageModal({ render, renderModal, context }:
 
     function deletePage() {
         console.log("deleting page")
-        if (context.pagedata.path == "/") return renderModal(false)
+        if (context.pagedata.path == "/" || context.pagedata.path == "%2F") return renderModal(false)
 
         fetch("/api/pages?location=" + encodeURIComponent("/"))
             .then(data => data.json())

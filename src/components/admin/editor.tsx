@@ -145,6 +145,7 @@ export default function BackendEditor({ context }: { context: any }) {
     function BackendComponentDeletionModal({ render, renderModal }: { render: boolean, renderModal: any }) {
         function deleteComponent() {
             const newPagedata = { ...context.pagedata };
+            if (newPagedata.children.length == 1) return renderModal(false);
             newPagedata.children.splice(context.activeSection, 1);
             context.setPagedata(newPagedata);
             context.webSocket.send(JSON.stringify({ type: "page-update", path: [], prop: "children", value: newPagedata.children }));
